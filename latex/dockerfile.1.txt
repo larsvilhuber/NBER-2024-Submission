@@ -1,0 +1,5 @@
+FROM registry.codeocean.com/codeocean/stata:16.0-ubuntu18.04
+ARG DEBIAN_FRONTEND=noninteractive
+COPY stata.lic /usr/local/stata/stata.lic
+RUN stata 'ssc install estout' \
+    && stata 'ssc install outreg' # Original versions: latest latest

@@ -1,0 +1,7 @@
+cd /path/to/downloaded/capsule/
+docker run -it --rm \
+  -v $(pwd)/code:/code \
+  -v $(pwd)/data:/data \
+  -v $(pwd)/results:/results \
+  -w /code \
+  $MYHUBID/${MYIMG} ./run
