@@ -66,7 +66,7 @@
   \vspace*{0.4in}
 
 \begin{abstract}
-The abstract should be no more than 250 words.
+\input{latex/abstract}
 \end{abstract}
 \end{center}
 
@@ -89,7 +89,7 @@ academic communications. It should not exceed 400 words, and more succinct, the 
 
 Concerns about confidentiality in statistical products have increased in the past several years. While the new disclosure avoidance techniques introduced for the 2020 United States Decennial Census \citep{abowd_2020_2022} garnered much attention, the academic community also expressed concerns about agency plans to apply formal disclosure avoidance techniques to public-use microdata files (PUMFs), and after an initial announcement, the Census Bureau delayed implementation of such methods for the American Community Survey \citep{daily_disclosure_2022}.
 
-On the other hand, long-running pilot projects with (non-formal) synthetic microdata products (SynLBD \citep{KinneyEtAl2011}, SIPP Synthetic Beta \citep{Benedettoetal_2013}) came to an end in 2022 \citep{vilhuber_end_2022}. These pilot projects made use of a publicly accessible analysis server housing synthetic data, authorized for release in this environment by the Census Bureau and the IRS (the ``Synthetic Data Server,'' SDS), combined with a mechanism to re-run the analysis using confidential data, housed in the confidential computing environments of the U.S. Census Bureau. Researchers obtained (fast) access to the SDS, where they interactively developed their code, using the releasable synthetic data, in an environment specifically designed to mimic the Census Bureau's environment. Requests to validate the results obtained from prepared code were sent via email to designated Census Bureau staff, who then ran the code (often times debugging it), and handled disclosure avoidance analysis at the Census Bureau on behalf of the researchers. The modeling and analysis code provided by the researchers served to improve subsequent versions of the synthetic data. 
+On the other hand, long-running pilot projects with (non-formal) synthetic microdata products (SynLBD \citep{KinneyEtAl2011}, SIPP Synthetic Beta \citep{Benedettoetal_2013}) came to an end in 2022 \citep{vilhuber_end_2022}.\footnote{The SDS server was funded in part by NSF grants \href{http://www.nsf.gov/awardsearch/showAward.do?AwardNumber=1042181}{SES-1042181} and \href{http://www.nsf.gov/awardsearch/showAward.do?AwardNumber=1131848}{SES-1131848} as well as \href{https://sloan.org/grant-detail/6845}{Alfred P. Sloan Foundation Grant G-2015-13903}. The last of the funding through these grants ended in 2018, and availability after that time was funded through John Abowd's chair at Cornell University, on a shoestring budget.} These pilot projects made use of a publicly accessible analysis server housing synthetic data, authorized for release in this environment by the Census Bureau and the IRS (the ``Synthetic Data Server,'' SDS), combined with a mechanism to re-run the analysis using confidential data, housed in the confidential computing environments of the U.S. Census Bureau. Researchers obtained (fast) access to the SDS, where they interactively developed their code, using the releasable synthetic data, in an environment specifically designed to mimic the Census Bureau's environment. Requests to validate the results obtained from prepared code were sent via email to designated Census Bureau staff, who then ran the code (often times debugging it), and handled disclosure avoidance analysis at the Census Bureau on behalf of the researchers. The modeling and analysis code provided by the researchers served to improve subsequent versions of the synthetic data. 
 
 \begin{figure}
     \centering
@@ -103,14 +103,16 @@ On the other hand, long-running pilot projects with (non-formal) synthetic micro
 \newgeometry{bottom=0.5in}
 
 
-\subsection{Issues encountered with the SDS mechanism}
+\section{Lessons learned from the SDS mechanism}
 
-Code produced by researchers was often not fully reproducible, and anecdotally, the process was time-consuming for the Census Bureau staff tasked with producing the analysis on the confidential data.
+Several lessons emerged from the SDS mechanism. While many researchers used the data to write papers, and even organized conference sessions specifically around the use of the data,
+%
+\footnote{LERA session ``Data Gold! Exploiting the Rich Research Potential of Lifetime
+Administrative Earnings Data Linked to the Census Bureau’s
+Household SIPP Survey'',  at the Allied Social Sciences 2016 Annual Meeting \citep{american_economic_association_allied_2016}. }
+%
+even more researchers only ``tried out'' the data. While over 100 researchers were granted access to the server to access the SSB in the first five years of its availability (Figure~\ref{fig:growth_in_sds}), far fewer published using the SSB data. Almost none of the published articles actually used the results produced using the synthetic data. Comparison of parameters obtained from synthetic data and from confidential data using confidence interval overlap, a measure of congruence between the synthetic data and the confidential data introduced by\citet{tas2006}, showed frequent failure of the synthetic data to even cover the confidence interval of the  confidential data (Table~\ref{tab:overlap}). While the results in Table~\ref{tab:overlap} do not take into account a distinction between key and nuisance parameters (simply comparing all parameters estimated in researcher-provided models), authors may have simply been very hesitant to use the parameters estimated on the synthetic data.
 
-\section{Scaling up access to confidential data}
-
-If data cannot be made available due to intractable disclosure avoidance issues, yet access should be broadened, what can agencies do? 
-The pilot projects described earlier were not set up to scale, and yet they demonstrated that there is a need for such a process. The number of researchers gaining access grew continuously (see Figure~\ref{fig:growth_in_sds}). Special sessions at conferences were organized around the data accessed in this fashion. In general, based on conversation of the author with various researchers at conferences and by email, researchers were happy with the ability to access such data without having to request a full-blown project in an FSRDC, but were somewhat frustrated by the process. 
 
 \begin{figure}
     \centering
@@ -119,16 +121,64 @@ The pilot projects described earlier were not set up to scale, and yet they demo
     \label{fig:growth_in_sds}
 \end{figure}
 
-Statistical agencies and research institutes have explored various ways to scale up access to confidential data. Statistics Canada had RTRA process, Norway has the Microdata.no system, and Barrientos et al (2018) proposed a differentially private validation server. Many such processes have limitations that limit their utility for researchers. The aforementioned Statistics Canada and microdata.no systems strongly limit the type of analysis that is feasible by restricting the software keywords that can be used (RTRA), by creating a structured new statistical language (microdata.no), or by limiting the types of analysis that can be run and validated (Barrientos et al).
+\begin{table}[]
+    \centering
+    
+    \input{latex/table-coverage}
+    \caption{Confidence interval overlap, per parameter, for selected projects}
+    \label{tab:overlap}
+\end{table}
+
+Thus, a core goal of the synthetic data --- to replace the confidential data in researchers' analyses --- was not being met, even when the synthetic data actually was a very good stand-in (note the SynLBD project with a mean confidence interval overlap of 87\%). Nevertheless, the synthetic data were complex enough to allow for development of models without access to the confidential data, what I would call ``good enough data.''
+
+Anecdotal evidence from both my own and Census staff's attempts to use author-provided computer code to run the analysis on the confidential data demonstrated challenges in reproducibility. Authors might hard-code intermediate findings, rather than letting the data drive the analysis, and would otherwise not fully leverage the similarity between the two computing environments. These lead to time-intensive human debugging, or multiple rounds with authors, neither of which are an efficient and satisfying process. 
+
+More interestingly, multiple authors treated the synthetic data access as a gateway process for access to the confidential data. Knowing that the synthetic data did not contain all the features they needed for their analysis, but having to wait for permission to access the more detailed confidential data in the Federal Statistical Research Data Centers, authors used the synthetic data to prepare analyses and explore the data. Figure~\ref{fig:useRDC} shows an early analysis of the first 106 users of the SDS, and subsequent usage of the FSRDC. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{figs/useRDCgraph.png}
+    \caption{SDS users and access to FSRDC}
+    \label{fig:useRDC}
+\end{figure}
+
+Importantly, in the initial phase of the projects, turnaround (submission of validation request and receipt of validated and privacy-protected results) was quite fast - single-digit weeks, rather than the multi-month process of obtaining access to the FSRDC. However, the introduction of new disclosure avoidance procedures at the Census Bureau, and the lack of integration of those procedures into the validation process, greatly increased the time lag in the second half of the projects.
+
+\section{Scaling up access to confidential data}
+
+If data cannot be made available due to intractable disclosure avoidance issues, yet access should be broadened, what can agencies do? 
+The pilot projects described earlier were not set up to scale, and yet they demonstrated that there is a need for such a process. The number of researchers gaining access grew continuously (see Figure~\ref{fig:growth_in_sds}). Special sessions at conferences were organized around the data accessed in this fashion. In general, based on conversation of the author with various researchers at conferences and by email, researchers were happy with the ability to access such data without having to request a full-blown project in an FSRDC, but were somewhat frustrated by the process. 
+
+
+Statistical agencies and research institutes have explored various ways to scale up access to confidential data. Statistics Canada had RTRA process, Norway has the Microdata.no system, and Barrientos et al (2018) proposed a differentially private validation server. 
+
+Many such processes have limitations that limit their utility for researchers. The aforementioned Statistics Canada and microdata.no systems strongly limit the type of analysis that is feasible by restricting the software keywords that can be used (RTRA), by creating a structured new statistical language (microdata.no), or by limiting the types of analysis that can be run and validated (Barrientos et al).
 
 The issue is compounded by well-documented problems with the reproducibility of code in the social sciences. Heuristically, many of the problems with the SDS arose because the code failed to reproduce during validation, even though it was  run in a very similar environment to the development environment. Researchers in the social sciences appear to rely heavily on interactive computing, with code produced subsequently failing simple reproducibility tests. In a sample of over 8,000 replication packages associated with high-profile economics articles, only 30\% had some sort of master script.\footnote{Code run in November 2023, searching for any filename that contained the strings `main' or `master', the most common name used for control code in economics.} In part to cater to this need, remote-access or local secure access in the form of physical or virtual secure data enclaves is still the dominant - but expensive - way to access confidential data. The dominant method of access thus forces researchers to choose between lower quality data in an environment that corresponds to their preferred computing method, and higher quality confidential data in environments that are expensive for researchers, data providers, or both.
 
+\section{Desiderata}
+\label{sec:desiderata}
+
+Drawing on the experience from the SDS pilot projects and other remote access methods used in the past, as well as looking at newer technologies that have emerged in the last decade, I postulate that a new, scalable mechanism to provide access to confidential data should have the following desirable characteristics:
+
+\begin{itemize}
+    \item the mechanism must support arbitrary modeling approaches and ideally a large number of programming languages
+    \item the mechanism must allow for development of models by researchers that are close to their ``normal'' method of developing models
+    \item the mechanism must be low-cost for the data provider, scaling at best sub-linearly with the number of users of those datasets
+    \item the mechanism must be low-cost for the data user, imposing at best marginal costs on their existing research infrastructure (software, computers)
+    \item the privacy-protected data provided as part of such mechanisms must be good enough to allow for complex modeling
+    \item validation, if necessary, must be fast - on the order of hours
+\end{itemize}
+
+Note that public-use data, as historically provided by statistical agencies, satisfies all of those criteria, except for the last one. Should statistical agencies actually offer validation even for such public use data, as \citet{reiter_verification_2009} have argued? Traditionally, they do not, and leave it up to individual researchers to ``self-validate'' by requesting access to confidential data in a time-consuming fashion.\footnote{See \cite{armour_using_2016} for one example of such a project, affecting the widely-used Current Population Survey.}
 
 \section{A proposal using Containers}
 \label{sec:proposal}
-We demonstrate a simple scenario of using containers, which can be hosted on a cloud platform, but also run individually on researcher compute platforms, to facilitate synthetic and confidential data processing. The purpose of using containers is to provide users with access to synthetic data and coding resources such that their analysis is easily reproducible. Containers can easily be validated for reproducibility before they are then forwarded to the confidential computing environment. Once determined to be reproducible, extending the analysis to use confidential data, and enables a wide spectrum of plug-in disclosure avoidance measures as well. Crucially, all validation of reproducibility can be performed prior to validation using the confidential data, on open, possibly commercial platforms. Only once reproducibility is confirmed is the same analysis model ported to the confidential data. 
+We demonstrate a simple scenario that satisfies most of the desiderata,  using containers. Containers, often referred to using the name of a particular implementation by a commercial provider (Docker),  can be hosted on a cloud platform, but also run individually on researcher compute platforms (laptops), to facilitate synthetic and confidential data processing. The purpose of using containers is to provide users with access to synthetic data and coding resources such that their analysis is easily reproducible. Containers can easily be validated for reproducibility before they are then forwarded to the confidential computing environment. Once determined to be reproducible, extending the analysis to use confidential data, and enables a wide spectrum of plug-in disclosure avoidance measures as well. Crucially, all validation of reproducibility can be performed prior to validation using the confidential data, on open, possibly commercial platforms. Only once reproducibility is confirmed is the same analysis model ported to the confidential data. 
 
-The use of cloud providers removes the need for users of the synthetic to install anything locally. The use of containers enforces reproducibility out-of-box when using synthetic data, as well as streamlines validation against the confidential data (which is in essence a replication of the analysis on the synthetic data). Furthermore, it enables scalability. Codeocean is a commercial service facilitating that process by making the resources available through a web browser, though the basic functionality can be achieved on any container system. Options include [Wholetale](https://wholetale.org), [Gigantum](https://gigantum.com/), and others. Finally, users who wish to not use such services can also typically provide their own setup for the synthetic data component, at very little additional cost or effort. Many university computing system provide some support on their high-performance computing clusters. For data providers, the tools used (containers) are widely used by numerous cloud providers, are transparent in how they are built, and allow for in-depth security scanning while retaining much of the flexibility that researchers and IT providers seek.
+The use of cloud providers removes the need for users of the synthetic data to install anything locally. The use of containers enforces reproducibility out-of-box when using synthetic data, as well as streamlines validation against the confidential data (which is in essence a replication of the analysis on the synthetic data). Furthermore, containers enable scalability. 
+
+Codeocean is a commercial service facilitating that process by making the resources available through a web browser, though the basic functionality can be achieved on any container system. Options include [Wholetale](https://wholetale.org), [Gigantum](https://gigantum.com/), and others. Finally, users who wish to not use such services can also typically provide their own setup for the synthetic data component, at very little additional cost or effort. Many university computing system provide some support on their high-performance computing clusters. For data providers, the tools used (containers) are widely used by numerous cloud providers, are transparent in how they are built, and allow for in-depth security scanning while retaining much of the flexibility that researchers and IT providers seek.
 
 The use of containers in this way is novel as a systematic way to provide scalable, potentially high-throughput validation, and differs in usage from previous methods, such as the Cornell Synthetic Data Server. In the same 8,000 replication packages mentioned earlier, only 0.13\% had used containers. However, it has been used in a small number of well-published instances in the economics literature for precisely this kind of purpose, and uses methods that are very widespread in the computer science and statistics community \citep{boettiger_introduction_2015,moreau_containers_2023}. We believe that it is promising as a modern way of implementing validation when data are confidential.
 
@@ -176,15 +226,18 @@ confidential data.
 
 This repository itself is the code. The code is written in Stata, and is confirmed to run on in this compute capsule.
 
-Basic structure ([refs](https://help.Codeocean.com/getting-started/uploading-code-and-data/paths)) imposes a strict separation between code, immutable data, and reproducible results:
+Basic structure\footnote{See \url{https://help.Codeocean.com/getting-started/uploading-code-and-data/paths}} imposes a strict separation between code, immutable data, and reproducible results:
 
-- all code is under `/code`
-- all data is under `/data`
-- all outputs [MUST be written to `/results`](https://help.Codeocean.com/getting-started/uploading-code-and-data/saving-files), otherwise they are lost. 
+\begin{itemize}
+    \item all code is under `/code`
+    \item all data are under `/data`
+    \item all outputs [MUST be written to `/results`](https://help.Codeocean.com/getting-started/uploading-code-and-data/saving-files), otherwise they are lost.
+
+\end{itemize}
 
 Outputs are regenerated at each run, and the history of such runs can be found (for the developing user) in the right pane. When the user, at the end of the development process, requests publication of the compute capsule, only the last run is published, together with code and data.
 
-To facilitate this file organization for the user, the template code includes a [config.do](config.do) file, which applies best programming practices by defining some global variables for file paths that are used elsewhere in the code. It also instantiates logfiles, which are also written to `/results`.
+To facilitate this file organization for the user, the template code includes a \texttt{config.do} file, which applies best programming practices by defining some global variables for file paths that are used elsewhere in the code. It also instantiates logfiles, which are also written to `/results`.
 
 
 %## The use of external packages
@@ -348,9 +401,19 @@ One key condition for such a system is the ability to post SSB data publicly, al
 
 \section{Conclusion}
 
-The use of containers ensures reproducibility, reliable portability, and enables scalability. The use of cloud-based commercial services requires no infrastructure or software maintenance by either data provider or users. With very little effort, automation is possible (potentially through web forms), and the only likely constraint to full automation is the absence of automated output vetting algorithms. 
+The use of containers ensures reproducibility, reliable portability, and enables scalability. The use of cloud-based commercial services requires no infrastructure or software maintenance by either data provider or users, but is not a necessary condition, as users can easily provide their own infrastructure. With very little effort, automation is possible (potentially through web forms), and the only likely constraint to full automation is the absence of automated output vetting algorithms. 
+
+Thus, containers satisfy most of the desiderate outlined earlier, but still rely on high-quality synthetic data, and a privacy-protection mechanism that can scale. If such a privacy-protection mechanism can be tuned to acceptable protection levels (on par with traditional mechanisms that are applied to unrestricted public-use products), then validation can be made highly automated, and the quality of the synthetic data itself can be decreased. 
 
 
+% \begin{itemize}
+%     \item the mechanism must support arbitrary modeling approaches and ideally a large number of programming languages
+%     \item the mechanism must allow for development of models by researchers that are close to their ``normal'' method of developing models
+%     \item the mechanism must be low-cost for the data provider, scaling at best sub-linearly with the number of users of those datasets
+%     \item the mechanism must be low-cost for the data user, imposing at best marginal costs on their existing research infrastructure (software, computers)
+%     \item the privacy-protected data provided as part of such mechanisms must be good enough to allow for complex modeling
+%     \item validation, if necessary, must be fast - on the order of hours
+% \end{itemize}
 
 
 
@@ -378,7 +441,8 @@ The use of containers ensures reproducibility, reliable portability, and enables
 The author have no conflicts of interest to declare. The mention of commercial entities is not meant to endorse any such providers, and the author holds no financial interest in any of the mentioned commercial entities.
 
 \subsection*{Acknowledgments}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id massa vulputate, tristique mi id, imperdiet mi. Mauris id ante ac lacus mollis sagittis. Sed imperdiet nibh id eros malesuada, at fermentum urna mollis. Sed id elit eu arcu varius tempor tincidunt in orci. Nullam accumsan diam vitae nibh fermentum, nec facilisis leo pulvinar. Ut condimentum nisl in orci euismod mattis. Fusce at mauris augue. 
+
+I have benefited from discussions with many folks, including Gary Benedetto, John Abowd, Rob Sienkiewicz, and from feedback following presentations to the National Academies, Census Bureau, and at the NBER conference on ``Data Privacy Protection and the Conduct of Applied Research.'' The original development of the idea was partially funded by \href{https://sloan.org/grant-detail/6845}{Alfred P. Sloan Foundation Grant G-2015-13903}.
 
 \subsection*{Contributions}
 
