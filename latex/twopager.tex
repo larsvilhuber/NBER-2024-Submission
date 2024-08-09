@@ -1,0 +1,48 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{natbib}
+\usepackage{fullpage}
+\usepackage{hyperref}
+
+\title{A new proposal for synthetic data validation at scale}
+\author{Lars Vilhuber}
+\date{August 2024}
+
+
+
+\begin{document}
+
+\maketitle
+
+
+\section{Desiderata}
+\label{sec:desiderata}
+
+Drawing on the experience from the SDS pilot projects and other remote access methods used in the past, as well as looking at newer technologies that have emerged in the last decade, I suggest that a new, scalable mechanism to provide access to confidential data should have the following desirable characteristics:
+
+\begin{enumerate}
+    \item the mechanism must support arbitrary modeling approaches and ideally a large number of programming languages
+    \item the mechanism must allow for development of models by researchers that are close to their ``normal'' method of developing models
+    \item the mechanism must be low-cost for the data provider, scaling at best sub-linearly with the number of users of those datasets
+    \item the mechanism must be low-cost for the data user, imposing at best marginal costs on their existing research infrastructure (software, computers)
+    \item the privacy-protected data provided as part of such mechanisms must be good enough to allow for complex modeling
+    \item validation, if necessary, must be fast - on the order of hours
+\end{enumerate}
+
+Note that public-use data, as historically provided by statistical agencies, satisfies all of these criteria, except for the last one. Should statistical agencies actually offer validation even for such public use data, as \citet{reiter_verification_2009} have argued? Traditionally, they do not, and leave it up to individual researchers to ``self-validate'' by requesting access to confidential data in a time-consuming fashion.\footnote{See \cite{armour_using_2016} for one example of such a project, affecting the widely-used Current Population Survey.}
+
+\section{A Proposal using Containers}
+\label{sec:proposal}
+I demonstrate a simple scenario that satisfies most of the desiderata,  using containers. Containers, often referred to using the name of a particular implementation by a commercial provider (Docker), are technology most often, but not exclusively associated with Linux, which enables computer processes and code libraries to be bundled and constrained. In essence, a container is a bundle of all the dependencies and code an app, or a researcher's statistical analysis, needs, into a single compact file, which can then be run on any computer without (much) further ado. Containers can be hosted on a cloud platform, but can also run individually on researcher compute platforms (laptops).  The purpose of using containers is to provide users with access to synthetic data and coding resources such that their analysis is easily portable, and verifiably reproducible. Containers can easily be validated for reproducibility before they are then forwarded to the confidential computing environment. Once determined to be reproducible, they can then extend the analysis to use confidential data, and enable a wide spectrum of plug-in disclosure avoidance measures as well. Crucially, all validation of reproducibility can be performed prior to validation using the confidential data, on open, possibly commercial platforms. Only once reproducibility is confirmed is the same analysis model ported to the confidential data. 
+
+The use of cloud providers removes the requirement for users of the synthetic data to install anything locally. The open-source nature of the container technology, on the other hand, allows users to do so, when they want to, or when they have to. The use of containers enforces reproducibility out-of-box when using synthetic data, as well as streamlines validation against the confidential data (which is in essence a replication of the analysis on the synthetic data). Furthermore, containers enable scalability. 
+
+Codeocean is a commercial service facilitating that process by making the resources available through a web browser, though the basic functionality can be achieved on any container system. Other services in this space include Options include \href{https://wholetale.org}{Wholetale}, \href{https://www.onyxia.sh/}{Onyxia}, and many others.\footnote{An earlier version of this presentation mentioned Gigantum. As is not unusual in this space, Gigantum no longer functions as a company. However, with the right setup, the open-source specification of most current container technology do not depend on any single provider.} Finally, users who wish to not use such services can also typically provide their own setup for the synthetic data component, at very little additional cost or effort. Many university computing system provide some support on their high-performance computing clusters. For data providers, the tools used (containers) are widely used by numerous cloud providers, are transparent in how they are built, and allow for in-depth security scanning while retaining much of the flexibility that researchers and IT providers seek.
+
+The use of containers in this way is novel as a systematic way to provide scalable, potentially high-throughput validation, and differs in usage from previous methods, such as the Cornell Synthetic Data Server. Containers have been used in a small number of well-published instances in the economics literature for precisely this kind of purpose, and are well-understood in the computer science and statistics community \citep{boettiger_introduction_2015,moreau_containers_2023}. Nevertheless, acceptance in the economics community is not great, so far. In the same 8,000 replication packages mentioned earlier, only 0.13\% had used containers. 
+
+\bibliographystyle{econ}
+\bibliography{references}
+
+
+\end{document}
