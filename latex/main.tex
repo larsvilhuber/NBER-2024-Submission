@@ -27,6 +27,30 @@
   morestring=[b]"
 }
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% This section is to format the responses to referees    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{environ} % Required for defining new environments
+\usepackage{lipsum}
+\usepackage{acronym}
+\input{latex/acrodefs}
+
+\definecolor{lightgray}{gray}{0.9}
+\definecolor{darkblue}{rgb}{0, 0, 0.5}
+
+\NewEnviron{referee}{%
+  \\\noindent\fcolorbox{lightgray}{lightgray}{\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}\itshape\BODY\end{minipage}%
+  \mbox{}% Add an empty box to force proper box closure
+  }%
+}
+
+\NewEnviron{response}{%
+  \noindent\textcolor{darkblue}{\textbf{Response: }}\begin{minipage}[t]{\dimexpr\textwidth-1cm\relax}\textcolor{darkblue}{\BODY}\end{minipage}
+}
+
+
 \begin{document}
 
 % Larger bottom margin for the first page
@@ -83,9 +107,46 @@ the article, in ways that can be understood by the general public and cited by t
 directly and accurately.  It therefore should avoid technical terms or language designed for
 academic communications. It should not exceed 400 words, and more succinct, the better.
 
-\section{A short history of synthetic data, verification servers, and improving access to confidential data}
+\section*{Introduction}
+
+Summary of what I set out to do:
+
+\begin{itemize}
+    \item High-quality (analytically valid) synthetic data, prepared as a way to grant researchers indirect access to confidential data, are costly to produce.
+    \item Validation (running the code prepared on synthetic data on confidential data to validate the results) is akin to reproducibility checks, and hard.
+    \item Containers are a way to address the reproducibility problem, but may, in general, be too prescriptive.
+    \item In the context of providing access, the compromise of a prescriptive container may be an acceptable tradeoff, allowing for the production of lower-quality synthetic data in exchange for less error-prone and therefore faster validation processes
+\end{itemize}
+
+Concerns about confidentiality in statistical products have increased in the past several years. While the new disclosure avoidance techniques introduced for the 2020 United States Decennial Census \citep{abowd_2020_2022} garnered much attention, the academic community also expressed concerns about agency plans to apply formal disclosure avoidance techniques to \acp{PUMF}, and after an initial announcement, the Census Bureau delayed implementation of such methods for the \ac{ACS} \citep{daily_disclosure_2022}. 
+
+Part of the concern is that the application of confidentiality methods may prevent inferences that were feasibly made in the absence of those confidentiality procedures. Some of those concerns may be solved by adopting analysis methods that are congenial \citep{meng_multiple-imputation_1994} to the disclosure avoidance methods, though that is not a recent problem \citep{AbowdSchmutte_BPEA2015}. However, statistical agencies often attempt to provide ``one size fits all'' datasets for general purpose usage, as in the case of the \ac{ACS}, with the goal of  usability by a wide spectrum of models. One novel approach, at least at the time, was the provision of synthetic data that preserved most of the inferential validity of the underlying confidential data \citep{rubin_discussion_1993,little_statistical_1993,reiter_synthetic_2023,raghunathan_synthetic_2021}. However, producing such general purpose synthetic data that is reasonably non-disclosive has proven difficult and long.
+
+This article will set out to combine various lessons learned from both the literature and past experiments in a variety of domains to propose an alternative approach to providing access to confidential data via synthetic data. This includes lessons learned from the analysis of several thousand replication package in economics \citep{vilhuber_report_2025}, from past efforts to create custom (`bespoke') synthetic data \citep{nowok_providing_2017}, from current technology that allows for reliably reproducible analysis \citep[\textbf{containers}, see ][for an introduction]{boettiger_introduction_2015}, and the feedback of hundreds of potential users of synthetic data in a project I co-lead until 2022 \citep{vilhuber_end_2022}. The proposed mechanism will allow to relax some of the analytical validity of the synthetic data, but in exchange allow for rapid turnaround time for analyses, something that researchers value. A maintained assumption, informed by observing similar usages and from our own experience, is that the cost of such a system is dramatically lower, and can thus be feasibly implemented by budget-constrained federal agencies. 
+
+I will start by defining some of the concepts, then lay out the basic idea. I will expand on the advantages and (key) limitations to the mechanism, provide some likely candidates for implementation, and provide a practical (albeit simulated) example to illustrate the key simplifcations.
+
+\section{Concepts and Definitions}
+
+\subsection{Containers}
+
+Containers, often referred to using the name of a particular implementation by a commercial provider (Docker), are technology most often, but not exclusively associated with Linux, which enables computer processes and code libraries to be bundled and constrained. In essence, a container is a bundle of all the dependencies and code an app, or a researcher's statistical analysis, needs, into a single compact file, which can then be run on any computer without (much) further ado. They can also contain the data necessary for such computations, though there is also the ability to inject components --- such as researcher-specific code or data --- at the time a container is run. Containers can be hosted on a cloud platform, but can also run individually on researcher compute platforms (laptops).  They have been primarily developed to allow for lightweight but massive scaling of internet applications, which requires the same process be re-executed in a reliable fashion, i.e., in a reproducible fashion. This latter aspect is what has made it attractive for academic researchers as well, and containers have been put forward as a mechanism for reproducible research for nearly a decade at this point \citep{boettiger_introduction_2015}, with various commercial and academic services arising around the use of containers \citep{clyburne-sherin_computational_2019,chard_toward_2020,brinckman_computing_2018}. Alternatives to Docker containers are Apptainer \citep{contributors_to_the_apptainer_project_apptainer_2025}, various Docker-compatible Linux implementations, or even BSD ``jails'' \citep{the_freebsd_project_chapter_2025}.\footnote{There are container implementations for computers running Windows and macOS, typically running within a virtual machine (a simulated computer) running Linux. It is technically feasible to run a Windows container. Virtual machines are a more complex method of simulating an entire computer, but introduces more complexity in terms of the transparency, a key feature in this article.} 
+
+Container usage in the context of confidential data in the social sciences or in statistical agencies is sparse, to the best of my knowledge. Containers themselves are not inherently secure, and need to be managed appropriately to ensure complete privacy and security are not compromised (see \citep{souppaya_application_2017}), though that is fundamentally similar to the fundamental IT security considerations all hosts of confidential data must implement.\footnote{Considerations include compliance with \ac{GDPR} or \ac{HIPAA}.} In this article, I do not address container security per se, and in fact, as I will outline in an example later, container usage in the confidential environment is not necessary, albeit possibly convenient.  
+
+%The purpose of using containers is to provide users with access to synthetic data and coding resources such that their analysis is easily portable, and verifiably reproducible.
+
+\subsection{Synthetic Data}
+
+The idea for what is now called ``synthetic data'' was laid out more than three decades ago by \citet{rubin_discussion_1993}: using models trained on the confidential data, (multiply) impute some or all the values for a simulated population, and release to the public. The resulting file does not comprise any single person's ``real'' data, but is expected to be statistically similar to the unreleased confidential data. Since the original proposal, synthetic data in the context of statistical agencies and survey organizations has been much discussed. The primary concerns are two: how protective are synthetic data, and how fit for purpose are they? This article will not contribute to clarifying that, and the interested reader is pointed at \citet{raghunathan_synthetic_2021,reiter_synthetic_2023} and in particular, \citet{raghunathan_roadmap_2023,raghu-nber-2024}. I note that synthetic data is also often discussed in the context of machine learning and the training of AI models, often with a different focus than that of statistical analysis. While not the primary focus, I will refer back to those domains in one particular aspect that makes synthetic data there useful, namely for the testing of code. 
+
+\subsection{Verification servers, and improving access to confidential data}
 \label{sec1}
 \label{intro}
+
+=== STOP HERE ========
+
+
 
 Concerns about confidentiality in statistical products have increased in the past several years. While the new disclosure avoidance techniques introduced for the 2020 United States Decennial Census \citep{abowd_2020_2022} garnered much attention, the academic community also expressed concerns about agency plans to apply formal disclosure avoidance techniques to public-use microdata files (PUMFs), and after an initial announcement, the Census Bureau delayed implementation of such methods for the American Community Survey \citep{daily_disclosure_2022}.
 
@@ -117,7 +178,7 @@ and even organized conference sessions specifically around the use of the data,
 Administrative Earnings Data Linked to the Census Bureau’s
 Household SIPP Survey'',  at the Allied Social Sciences 2016 Annual Meeting \citep{american_economic_association_allied_2016}. }
 %
-even more researchers only ``tried out'' the data. While over 100 researchers were granted access to the server to access the SSB in the first five years of its availability (Figure~\ref{fig:growth_in_sds}), far fewer published using the SSB data. Almost none of the published articles actually used the results produced using the synthetic data. Comparison of parameters obtained from synthetic data and from confidential data using confidence interval overlap, a measure of congruence between the synthetic data and the confidential data introduced by \citet{tas2006}, was very heterogeneous even for a given dataset across and within projects (Table~\ref{tab:overlap}). While the results in Table~\ref{tab:overlap} do not take into account a distinction between key and nuisance parameters (simply comparing all parameters estimated in researcher-provided models), authors may have simply been very hesitant to use the parameters estimated on the synthetic data.
+even more researchers only ``tried out'' the data. While over 100 researchers were granted access to the server to access the \ac{SSB} in the first five years of its availability (Figure~\ref{fig:growth_in_sds}), far fewer published using the \ac{SSB} data. Almost none of the published articles actually used the results produced using the synthetic data. Comparison of parameters obtained from synthetic data and from confidential data using confidence interval overlap, a measure of congruence between the synthetic data and the confidential data introduced by \citet{tas2006}, was very heterogeneous even for a given dataset across and within projects (Table~\ref{tab:overlap}). While the results in Table~\ref{tab:overlap} do not take into account a distinction between key and nuisance parameters (simply comparing all parameters estimated in researcher-provided models), authors may have simply been very hesitant to use the parameters estimated on the synthetic data.
 
 
 \begin{figure}
@@ -180,7 +241,7 @@ Note that public-use data, as historically provided by statistical agencies, sat
 
 \section{A Proposal using Containers}
 \label{sec:proposal}
-I demonstrate a simple scenario that satisfies most of the desiderata,  using containers. Containers, often referred to using the name of a particular implementation by a commercial provider (Docker), are technology most often, but not exclusively associated with Linux, which enables computer processes and code libraries to be bundled and constrained. In essence, a container is a bundle of all the dependencies and code an app, or a researcher's statistical analysis, needs, into a single compact file, which can then be run on any computer without (much) further ado. Containers can be hosted on a cloud platform, but can also run individually on researcher compute platforms (laptops).  The purpose of using containers is to provide users with access to synthetic data and coding resources such that their analysis is easily portable, and verifiably reproducible. Containers can easily be validated for reproducibility before they are then forwarded to the confidential computing environment. Once determined to be reproducible, they can then extend the analysis to use confidential data, and enable a wide spectrum of plug-in disclosure avoidance measures as well. Crucially, all validation of reproducibility can be performed prior to validation using the confidential data, on open, possibly commercial platforms. Only once reproducibility is confirmed is the same analysis model ported to the confidential data. 
+I demonstrate a simple scenario that satisfies most of the desiderata,  using containers.  Containers can easily be validated for reproducibility before they are then forwarded to the confidential computing environment. Once determined to be reproducible, they can then extend the analysis to use confidential data, and enable a wide spectrum of plug-in disclosure avoidance measures as well. Crucially, all validation of reproducibility can be performed prior to validation using the confidential data, on open, possibly commercial platforms. Only once reproducibility is confirmed is the same analysis model ported to the confidential data. The concept here is similar in principle to a ``Common Task Framework'' \citep{liberman_obituary_2010,liberman_reproducible_2014,liu_successes_2019}, but applied to the access problem around confidential data, not to a validation or holdout dataset \citep{liu_successes_2019,donoho_data_2024}.\footnote{I thank an anonymous referee for having pointed out this analogy.}  
 
 The use of cloud providers removes the requirement for users of the synthetic data to install anything locally. The open-source nature of the container technology, on the other hand, allows users to do so, when they want to, or when they have to. The use of containers enforces reproducibility out-of-box when using synthetic data, as well as streamlines validation against the confidential data (which is in essence a replication of the analysis on the synthetic data). Furthermore, containers enable scalability. 
 
@@ -209,7 +270,7 @@ the application. Crucially, container systems usually have the capability to eit
 \section{A detailed use case when using synthetic data}
 \label{sec:usecase}
 
-In this section, we walk through the process for a specific use case. The Census Bureau, data owner (custodian) of the confidential SIPP file merged with administrative data known as the SIPP Gold Standard file, makes a synthetic version of the Gold Standard file available as the "SIPP Synthetic Beta file" (SSB) \citep{Benedettoetal_2013}. The container host in the public domain is Codeocean, which provides cloud-based access to Docker-based containers (called "compute capsules"). Users log in via a simple web browser, with no install required. Crucially, Codeocean provides access to Stata and Matlab compute capsules, covering 95\% of economists' software needs. A Codeocean capsule can, however, also be used by researchers on their own workstation, as long as they have Docker installed (or a compatible container runtime) and have a Stata license. Because of the standards-based approach, it is also straightforward to exchange the configured Codeocean-generated "base image" for a security-vetted base image within the confidential environment.
+In this section, we walk through the process for a specific use case. The Census Bureau, data owner (custodian) of the confidential SIPP file merged with administrative data known as the SIPP Gold Standard file, makes a synthetic version of the Gold Standard file available as the \ac{SSB} \citep{Benedettoetal_2013}. The container host in the public domain is Codeocean, which provides cloud-based access to Docker-based containers (called "compute capsules"). Users log in via a simple web browser, with no install required. Crucially, Codeocean provides access to Stata and Matlab compute capsules, covering 95\% of economists' software needs. A Codeocean capsule can, however, also be used by researchers on their own workstation, as long as they have Docker installed (or a compatible container runtime) and have a Stata license. Because of the standards-based approach, it is also straightforward to exchange the configured Codeocean-generated "base image" for a security-vetted base image within the confidential environment.
 
 In this configuration, the Census Bureau can use Codeocean to house both the synthetic dataset as well as
 setup and configuration code that will assist the data user in creating code that is reproducible. The data
@@ -232,13 +293,12 @@ confidential data.
 
 This repository itself is the code. The code is written in Stata, and is confirmed to run on in this compute capsule.
 
-Basic structure\footnote{See \url{https://help.Codeocean.com/getting-started/uploading-code-and-data/paths}} imposes a strict separation between code, immutable data, and reproducible results:
+Basic structure of the validation process\footnote{See \url{https://help.Codeocean.com/getting-started/uploading-code-and-data/paths}} imposes a strict separation between code, immutable data, and reproducible results:\footnote{While there are various standards on the publication of research code, this is not meant to be yet another one. This is purely a requirement of the validation process, as implemented by this provider. The data custodian would need to define what their required structure is, which may or may not adhere to a specific code publication standard.}
 
 \begin{itemize}
     \item all code is under `/code`
     \item all data are under `/data`
     \item all outputs [MUST be written to `/results`](https://help.Codeocean.com/getting-started/uploading-code-and-data/saving-files), otherwise they are lost.
-
 \end{itemize}
 
 Outputs are regenerated at each run, and the history of such runs can be found (for the developing user) in the right pane. When the user, at the end of the development process, requests publication of the compute capsule, only the last run is published, together with code and data.
@@ -264,7 +324,7 @@ In its base configuration, Codeocean signals to researchers the successful compl
 
 \subsection{Concrete example: Estimating economic returns to education in the SIPP}
 
-This example runs a Mincer equation on the SIPP Synthetic Beta data (need cite). The code is split into 4 pieces, tied together by a script. The environment is specified through a Dockerfile. 
+This example runs a Mincer equation on the SIPP Synthetic Beta data \citep{u.s.censusbureauSIPPSyntheticBeta2015b}. The code is split into 4 pieces, tied together by a script. The environment is specified through a Dockerfile. The fully worked out example can be found at \href{https://github.com/larsvilhuber/ssb-demo/releases/tag/v20250403}{Github}.
 
 % ### Script
 
@@ -296,8 +356,7 @@ Alternatively, the user can export the entire capsule (including data), rebuild 
 
 \lstinputlisting[language=bash,basicstyle=\footnotesize\color{NavyBlue}\ttfamily,,caption={Building the container},label={code:build}]{docker-build.txt}
 %
-Note that the image built has been posted publicly at \url{https://hub.docker.com/r/larsvilhuber/ssb-demo}.
-
+(Note that the image thus created should not be publicly posted, as it contains a valid license file).
 
 \subsubsection{Validating researcher-provided code}
 
@@ -410,6 +469,8 @@ As an added benefit, by compiling a library of container-based scientific uses o
 
 \section{Conclusion}
 
+(Return to desiderata here, provide guidance on compromises)
+
 The use of containers ensures reproducibility, reliable portability, and enables scalability. The use of cloud-based commercial services requires no infrastructure or software maintenance by either data provider or users, but is not a necessary condition, as users can easily provide their own infrastructure. With very little effort, automation is possible (potentially through web forms), and the only likely constraint to full automation is the absence of automated output vetting algorithms. 
 
 Thus, containers satisfy most of the desiderate outlined earlier, but still rely on high-quality synthetic data, and a privacy-protection mechanism that can scale. If such a privacy-protection mechanism can be tuned to acceptable protection levels (on par with traditional mechanisms that are applied to unrestricted public-use products), then validation can be made highly automated, and the quality of the synthetic data itself can be decreased, while maintaining high levels of user acceptance due to a fast validation process.
@@ -446,7 +507,7 @@ Thus, containers satisfy most of the desiderate outlined earlier, but still rely
 
 
 \subsection*{Disclosure Statement}
-The author have no conflicts of interest to declare. The mention of commercial entities is not meant to endorse any such providers, and the author holds no financial interest in any of the mentioned commercial entities.
+The author has no conflicts of interest to declare. The mention of commercial entities is not meant to endorse any such providers, and the author holds no financial interest in any of the mentioned commercial entities.
 
 \subsection*{Acknowledgments}
 
@@ -454,7 +515,7 @@ I have benefited from discussions with many folks, including Gary Benedetto, Joh
 
 \subsection*{Contributions}
 
-LV conceived the topic, wrote the text, and prepared the examples.
+LV conceived the topic, wrote the text, and prepared the examples. The statistical code used within the container, serving as a stand-in for any statistical analysis, was provided by Evan Totty, U.S. Census Bureau.  
 
 
 %Begin appendix section(s)
@@ -471,5 +532,6 @@ LV conceived the topic, wrote the text, and prepared the examples.
 % Please do not modify anything below this line.
 \printbibliography
 
+\input{latex/responses.tex}
 
 \end{document}

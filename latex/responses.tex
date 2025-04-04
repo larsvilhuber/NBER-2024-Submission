@@ -1,0 +1,252 @@
+
+\section{Responses}
+
+\begin{itemize}
+
+\item Idea is akin to holdout samples (in computer science, but also social sciences \citep{liu_successes_2019}) 
+\item "common task framework": research design from machine learning called the common task method \citep{donoho_50_2017,liberman_obituary_2010}. The common task method involves three main elements: a common target for predictive modeling, a common error metric, and a common data set with both training data available to participants and held-out data used for evaluation. \citep{liu_successes_2019}
+
+\end{itemize}
+
+\textbf{General responses}
+
+\begin{response}
+    Thank you to the editor and the reviewers for their valuable input, which I very much appreciated, and which I believe has lead to substantial improvement of the text. I have revised the structure of the text, and linked it with various other efforts highlighted by the reviewers. 
+
+    \begin{itemize}
+        \item I have added a new introduction that lays out what the article intends to convey, and what tools it will describe. This should help make it clearer from the start, and should have been included; my apologies for only adding it now.
+        \item I then follow with a section that describes and situates the various concepts, both those that might be new to some in the readership (``containers'') and those that might be known, but possibly ambiguously defined and used in a broader context (first among them: ``synthetic data''). This was a request by multiple reviewers, suggesting that it is still a necessary structure to provide. I will note that I had previously talked with others in the open (social) science field, who very much implied that even the late definition of containers was ``very pedantic'' because apparently everybody (should) know about that by now... highlighting the wide diversity in information dispersal even within the narrow "field" of social science. I hope that the current definitions strike a good balance.
+    \end{itemize}
+\end{response}
+
+%\subsection*{To editor}
+\textbf{To editor} 
+
+\begin{referee}
+As you can see from the three reports attached,
+the reviewers are generally positive about the topic, but have a number of non-trivial concerns and
+suggestions on the substance (especially from Reviewer 1) and on the paper organization and
+presentation. Reading it myself I can see why Reviewers 2 and 3 find it difficult to see quickly what the
+article is about. I surmise the concept of "container" is not a commonly understood one, and even
+after I read its description in Section 5, it is not immediately intuitive why it can protect data privacy at
+scale. Of course that reflects my ignorance, and your article is to educate people like me. Although I
+am of sample size 1, I'm quite confident that over 50% of statisticians are as clueless as I am on this
+topic. :-)
+For people like me, the article would be much more enticing if it starts with defining the container,
+and explain it intuitively in what ways it helps to protect data privacy, and can do so at scale. Then
+you can discuss why other methods are inferior and in what way. 
+\end{referee}
+
+\begin{response}
+    I have now added a new introduction that lays out the goal of the article, and then added/reformated a section on concepts and prior science, which should hopefully address this point.
+\end{response}
+
+\begin{referee}
+By the way, the list of desiderata in
+Section 6 is great,
+but I am a strong believer of the no-free lunch principle. I'd be very happy to be wrong here, but
+suspect in many practical situations, one may need to prioritize some. If so, some discussions on how
+to prioritize may make readers pay more attention to the list, as those who find the list too
+demanding or idealistic might choose to ignore it.
+
+\end{referee}
+
+\begin{response}
+    I address this in an expanded conclusion.
+\end{response}
+
+
+\textbf{Reviewer 1:}
+
+\begin{referee}
+    
+The manuscript centers on the use of container technology to improve access to confidential data for research while ensuring data privacy and security. [cite: 1, 2, 3, 4, 5, 6, 7] The manuscript outlines how containers, in combination with synthetic data and controlled environments like Codeocean, provide researchers and data stewards with a compatible setup that facilitates statistical analysis on confidential datasets while preserving privacy. [cite: 2, 3, 4, 5, 6, 7] The manuscript discusses how containers create reproducible, secure environments that can be deployed on public or private infrastructure, enabling researchers to develop and validate code on synthetic data. [cite: 3, 4, 5, 6, 7] Once validated, this code can be securely transferred to confidential environments for final analysis. [cite: 3, 4, 5, 6, 7] The manuscript emphasizes the scalability, reproducibility, and importance of disclosure avoidance procedures enabled by containers, ensuring sensitive information remains protected throughout the research process. [cite: 5, 6, 7] It also acknowledges that, although the use of containers helps mitigate scalability issues, a major bottleneck in scaling this system will still lie in the need for automated output vetting, which remains a key challenge in disclosure avoidance. [cite: 5, 6, 7]
+
+The manuscript presents a strong case for using containers to improve access to confidential datasets while preserving privacy. [cite: 8, 9, 10, 11, 12, 13] By using containerization, the approach enhances reproducibility through a standardized environment as researchers can conduct analyses within consistent configurations. [cite: 8, 9, 10, 11, 12, 13] This setup enables data stewards to establish clear boundaries, such as specific software versions and dependencies, which helps ensure a controlled and reproducible workflow. [cite: 8, 9, 10, 11, 12, 13] Managing these parameters creates an environment where analyses can be reliably repeated or validated. [cite: 8, 9, 10, 11, 12, 13] The approach aligns well with best practices in secure data handling. [cite: 11, 12, 13] The requirement for researchers to provide only their code, combined with the container's capacity to be rebuilt within a secure environment, adds efficiency to the process. [cite: 11, 12, 13] An implementation of this idea by an institution committed to providing access to confidential datasets while safeguarding privacy would be valuable. [cite: 11, 12, 13, 14] Below are some suggestions to further strengthen the manuscript.
+
+\begin{itemize}
+    \item A valuable addition to the manuscript would be a subsection (or adding some paragraphs) discussing metrics that institutions might consider when evaluating the feasibility of container-based secure environments for accessing and analyzing confidential datasets. [cite: 14, 15, 16, 17, 18, 19, 20, 21] Some potential metrics could be:
+    \begin{itemize}
+        \item Hardware and infrastructure costs associated with supporting container technology, especially if large datasets or complex analyses require substantial computational resources. [cite: 15, 16, 17, 18, 19, 20, 21]
+        \item Number of validations that can be completed in a given period of time, such as per week. [cite: 15, 16, 17, 18, 19, 20, 21]
+        \item IT personnel costs, as institutions will likely need staff skilled in containerization, data security, and privacy protocols to set up and maintain these environments effectively. [cite: 15, 16, 17, 18, 19, 20, 21]
+        \item Learning costs for both internal and external users, including the time and resources required to train users unfamiliar with container technology. [cite: 15, 16, 17, 18, 19, 20, 21]
+        \item The types of software, programming languages, and analysis tools that potential users currently rely on. [cite: 19, 20, 21] This information, possibly gathered through a user survey, can guide institutions in configuring containers with compatible software and dependencies. [cite: 19, 20, 21] However, institutions may face challenges in surveying a representative sample of potential users. [cite: 19, 20, 21]
+    \end{itemize}
+    \item Compliance with relevant laws. [cite: 22, 23, 24]
+    \item  The code snippets provided in the document are a valuable addition, moving the discussion from theory to application and giving readers actionable steps to set up their containerized environments. [cite: 22, 23, 24] This hands-on approach makes the concept more accessible, especially for those looking to replicate or test the methods described. [cite: 22, 23, 24] To further enhance clarity, it would be beneficial to include more inline comments within the code snippets to explain relevant lines, particularly for readers unfamiliar with Dockerfile syntax and Stata commands. [cite: 22, 23, 24]
+    \item The distinction between "reproducible run" and "validating researcher-provided code" in Sections 6.3.2 and 6.3.4 could benefit from further clarification, as these terms may seem similar yet serve distinct purposes. [cite: 25, 26, 27, 28, 29, 30] In Section 6.3.2, the term "reproducible run" appears to refer to an initial execution of code on CodeOcean's infrastructure to confirm that the code runs without technical errors though this does not guarantee that all necessary code has been executed, as sections of code may be commented out or non-functional. [cite: 25, 26, 27, 28, 29, 30] In contrast, Section 6.3.4 describes a "validation" step where the replicator, or data custodian, re-runs the container on synthetic data to ensure reproducibility in a non-secure environment if there are any doubts or if initial validation wasn't completed on CodeOcean. [cite: 25, 26, 27, 28, 29, 30] While someone with a computer science background might quickly understand these nuances, broader audiences might find the distinction confusing. [cite: 25, 26, 27, 28, 29, 30] For this reason, it would be beneficial for the manuscript to elaborate on these two steps, clarifying their distinct roles in the reproducibility and validation process. [cite: 29, 30]
+    \item The document could benefit from addressing ongoing developments in the use of validation servers, particularly those leveraging differential privacy to automate output vetting. [cite: 31, 32, 33, 34, 35, 36, 37] Several research organizations are exploring validation servers because they allow institutions to control how users submit queries and specify the types of output that can be released, facilitating integration with differential privacy. [cite: 31, 32, 33, 34, 35, 36, 37] Implementing a similar approach with containers raises interesting possibilities and potential challenges. [cite: 31, 32, 33, 34, 35, 36, 37] For example, it could be feasible to set up containers equipped with OpenDP, enabling users to run analyses with differential privacy settings on synthetic data. [cite: 31, 32, 33, 34, 35, 36, 37] This setup could allow users to test analyses within a "reasonable" privacy budget and compare the outputs against those obtained using standard statistical software that does not employ differential privacy. [cite: 34, 35, 36, 37] However, with the proposed approach based on container technologies, there are likely to be significant challenges in automating output vetting through differential privacy within a secure environment. [cite: 34, 35, 36, 37] The manuscript should address these challenges if they exist. [cite: 36, 37, 38, 39, 40, 41] Additionally, requiring users to conduct their analyses in OpenDP may introduce a steep learning curve. [cite: 36, 37, 38, 39, 40, 41]
+    \item In a similar vein, instead of choosing between validation servers and containers, there could be potential in integrating these technologies. [cite: 38, 39, 40, 41] For instance, validation servers could be containerized and distributed across institutions, allowing researchers to submit queries locally. [cite: 38, 39, 40, 41] These queries could then be routed to a centralized secure environment, such as one maintained by the Census Bureau, ensuring controlled and consistent query processing across institutions. [cite: 38, 39, 40, 41] Including a discussion of these ideas in the document's discussion section would provide valuable insight into how containers and validation servers could work together to advance secure, scalable access to confidential data, and automatic output vetting. [cite: 38, 39, 40, 41]
+    \item There are several minor comments that need to be addressed in the manuscript:
+    \begin{itemize}
+        \item Ensure all typos are corrected (like Howver) and that all acronyms and initialisms are clearly defined upon first use (like SSB, FSRDC). [cite: 42, 43, 44, 45, 46, 47, 48, 49]
+        \item There is no reference to Figure 1 in the main text. [cite: 42, 43, 44, 45, 46, 47, 48, 49] If possible, the provided diagram in Figure 1 could include information on where containers are used or rebuilt to clarify the workflow. [cite: 42, 43, 44, 45, 46, 47, 48, 49]
+        \item On page 11, the purpose of the sentence, "which runs for about 3 minutes on a 2021-vintage Linux workstation," is unclear. [cite: 46, 47, 48, 49] Consider clarifying its relevance to the reader. [cite: 46, 47, 48, 49]
+        \item On page 9, the phrase "(need cite)" appears and should be replaced with an appropriate reference. [cite: 46, 47, 48, 49]
+         \item In section 6.3.4, the sentence, "Should the data custodian have doubts about the verified run of the capsule," requires further clarification on why the data custodian might have doubts about the capsule's verified run. [cite: 48, 49]
+    \end{itemize}
+\end{itemize}
+
+\end{referee}
+
+\begin{response}
+    Response begins here.
+\end{response}
+
+\textbf{Reviewer 2:}
+
+\begin{referee}
+    Solutions to issues in both researcher access to confidential data and reproducibility of
+results are important, and this paper addresses these issues in novel ways and demonstrates very
+compelling applications at a federal agency. Even reading the paper carefully it was difficult to discern
+the main conclusion and contribution from the various discussions though. Renaming the manuscript
+to relate to Census data, or the facilitation of research on synthetic data, might help the reader since
+the current title implies a new innovation in HIPAA compliant containers. Nonetheless there should be
+a discussion about the relationship of this contribution to the costs of requirements to obtain HIPAA
+compliant containers vs relying on synthetic datasets. 
+\end{referee}
+
+\begin{response}
+    I appreciate the viewpoint, as I had been blissfully ignorant of HIPAA  compliant containers - these are simply not present in any of the discussions in the social science data confidentiality setup that I have been involved in. In economics as much as in sociology and political science, most academics do not even know what containers are, and certainly don't interact with HIPAA in almost any circumstance.
+
+    I have reviewed what one can learn about HIPAA compliant containers, the context in which they are deployed, and identify where there is a connection. As the reviewer managed to glean from my previous version, the context here is not in securing containers, but in using unsecured containers - those that do not need to be secured - to improve access. I reference a few situations - not just HIPAA - where containers are used in secured environments. Most of those that I am aware of are deployed within an entire environment that is secure by whatever rule (not HIPAA, but GDPR or US Government security), and so the internal structure is less important. I hope this properly delineates the current approach from others where containers themselves play a more dominant role.
+\end{response}
+
+\begin{referee}
+    
+After I realized the manuscript was not on
+technical developments for containers, I got the impression it was a discussion of human interaction
+with a pilot design for an experiment at the Census bureau, but the manuscript
+does not take this further. In short the manuscript needs rewriting for improved clarity at the outset,
+including clearing stating the purpose of the work, what the work was, and the findings.
+
+\end{referee}
+
+\begin{response}
+    I hope that the present rewrite clarifies this, with changes throughout the text.
+\end{response}
+
+\begin{referee}
+    
+There is
+related work in applications of the "Common Task Framework" (see Donoho 2024 \url{https://doi.org/10.1162/99608f92.b91339ef})
+and using a container as a reproducible pipeline for checking against withheld test data by a federal
+agency (e.g. NIST) should be compared to the approach presented here. 
+
+\end{referee}
+
+\begin{response}
+    I now relate to the Common Task Framework, but delineate from the challenge paradigm that Donoho (2024) and others reference. In Donoho's classification, this is meant (possibly) for exploratory analysis. 
+\end{response}
+
+\begin{referee}
+
+The authors also appear to
+be presenting new standards for reproducible research code publication (e.g. section 6.1) yet don't
+reference the extensive body of literature on this topic. 
+
+\end{referee}
+
+\begin{response}
+    This was absolutely not meant as a new standard for research code publication. There are too many standards already (none of which is followed in the social science literature that I am familiar with). This is meant purely as a requirement of the validation. I have clarified that.
+\end{response}
+
+\begin{referee}
+    
+Ideally a link to their census example can be
+included in the manuscript, allowing readers to try out the example. 
+
+\end{referee}
+
+\begin{response}
+    I have added a link to the Github repository for the example.
+\end{response}
+
+
+\begin{referee}
+The ideas in the manuscript will
+generate lots of reader interest if they can be presented more clearly.
+\end{referee}
+
+\begin{response}
+    Thank you for your feedback!
+\end{response}
+
+
+\textbf{Referee 3}
+
+\begin{referee}
+    A definition of containers should be included in the abstract. 
+\end{referee}
+
+\begin{response}
+    TBD
+\end{response}
+
+
+\begin{referee}
+  It should also be included
+early in the main body of the text. \end{referee}
+
+\begin{response}
+   Excellent point, and I have added it there.
+\end{response}
+
+
+\begin{referee}
+At the very least, the author should consider including a short
+roadmap paragraph at the beginning of the paper so that readers know what to expect. Right now, as
+is written, containers do not appear until Section 5, leaving readers wonder what the paper is really
+about before reaching that point.
+\end{referee}
+
+\begin{response}
+    You are absolutely right, and this has been (hopefully) corrected.
+\end{response}
+
+
+\begin{referee}
+
+2.
+The Media Summary seems missing.
+
+\end{referee}
+
+\begin{response}
+    TBD
+\end{response}
+
+
+\begin{referee}
+
+3.
+Section 2 paragraph 1: SSB is not defined nearby, but rather in Section 6.
+\end{referee}
+
+\begin{response}
+    Apologies for that oversight.
+\end{response}
+
+
+\begin{referee}
+4.
+Table 1: It is unclear what each column is about until reading relevant text. It would be helpful to
+add some information about the confidence interval overlap, such as "the closer it is to 1 the higher
+the utility" in the table caption.
+5.
+Figure 1: It is not mentioned in text what Figure 1 is for and about.
+6.
+Page 5 middle paragraph: The second sentence starts with talking about Statistic Canada and
+2025-03-23, 16:50Firefox
+4 of 4
+https://outlook.office.com/mail/id/AAQkADkzYWRjZDBkLWNiNT...
+microdata.no but ends with the 2018 paper.
+7.
+Page 5 last paragraph: The author talks about "social sciences" generically but the reference is
+on economics. Some edits should be added.
+8.
+Section 6.2: The first sentence seems incomplete.
+9.
+Any comments/references/examples with Python?
+\end{referee}
