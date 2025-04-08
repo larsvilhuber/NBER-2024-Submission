@@ -1,21 +1,23 @@
 cd /path/to/downloaded/capsule/environment
-VERSION=16
 TAG=$(date +%F)
 MYHUBID=larsvilhuber
 MYIMG=ssb-demo
 DOCKER_BUILDKIT=1 docker build  . -t $MYHUBID/${MYIMG}:$TAG
-[+] Building 5.9s (8/8) FINISHED                                                
- => [internal] load build definition from Dockerfile                       0.0s
- => => transferring dockerfile: 365B                                       0.0s
- => [internal] load .dockerignore                                          0.0s
- => => transferring context: 2B                                            0.0s
- => [internal] load metadata for registry.codeocean.com/codeocean/stata:1  0.0s
- => [internal] load build context                                          0.0s
- => => transferring context: 133B                                          0.0s
- => [1/3] FROM registry.codeocean.com/codeocean/stata:16.0-ubuntu18.04     0.0s
- => CACHED [2/3] COPY stata.lic /usr/local/stata/stata.lic                 0.0s
- => [3/3] RUN stata 'ssc install estout'     && stata 'ssc install outreg  5.8s
- => exporting to image                                                     0.0s 
- => => exporting layers                                                    0.0s 
- => => writing image sha256:c76d3d1981c510f744cdd65e3f0c2321bc0b7a99e5285  0.0s 
- => => naming to docker.io/larsvilhuber/ssb-demo:2022-09-11                0.0s 
+[+] Building 4.5s (8/8) FINISHED                                   
+ => [internal] load build definition from Dockerfile                 0.1s
+ => => transferring dockerfile: 369B                                 0.0s
+ => [internal] load metadata for registry.codeocean.com/codeocean/s  1.1s
+ => [internal] load .dockerignore                                    0.1s
+ => => transferring context: 2B                                      0.0s
+ => [internal] load build context                                    0.1s
+ => => transferring context: 145B                                    0.0s
+ => [1/3] FROM registry.codeocean.com/codeocean/stata:16.0-ubuntu18  0.3s
+ => => resolve registry.codeocean.com/codeocean/stata:16.0-ubuntu18  0.0s
+ => => sha256:fd0e31b739fe4aab4c10a61d4d0460143bb09d868fbbda6c69848  0.0s
+ => => sha256:4df859214231ed09630bc2a5845a75aebdab67044dff8a2933b2e  0.0s
+ => [2/3] COPY stata.lic /usr/local/stata/stata.lic                  0.1s
+ => [3/3] RUN stata 'ssc install estout'     && stata 'ssc install   2.6s
+ => exporting to image                                               0.1s
+ => => exporting layers                                              0.1s
+ => => writing image sha256:f703842568b4fac943be530a6170c953f81fc29  0.0s
+ => => naming to docker.io/larsvilhuber/ssb-demo:2025-04-07          0.0s

@@ -2,12 +2,10 @@ VERSION=16
 TAG=16.0-ubuntu18.04-secure
 MYHUBID=censusbureau
 MYIMG=stata
-STATALIC=/path/to/stata/licenses
 CONFDATA=/path/to/confidential/data
 REQUEST=12345
 cd /path/to/requests
 docker run -it --rm \
-  -v ${STATALIC}/stata.lic.${VERSION}:/usr/local/stata/stata.lic \
   -v $(pwd)/$REQUEST/code:/code \
   -v $(pwd)/$REQUEST/data:/data \
   -v $(pwd)/$REQUEST/results-confidential:/results \

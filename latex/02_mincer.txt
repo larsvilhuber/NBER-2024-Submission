@@ -1,0 +1,20 @@
+include "config.do"
+use ${inputdata}/${SSBprefix}1.dta, clear
+/* data preparation omitted */
+**Specify dependent variable, endogeneous education variable, and rest of the specification(s)
+local depvar log_total_der_cpi
+local educvar educyears1
+local spec1 "age age_sq i.birthyear i.race foreign_born hispanic i.state married"
+local spec2 "potexp potexp_sq i.birthyear i.race foreign_born hispanic i.state married"
+local specs ""`spec1'" "`spec2'""
+
+**Loop through regressions, by gender
+eststo clear
+fvset base 1958 birthyear
+foreach g in 1 0 {
+foreach spec of local specs {
+    eststo: reg `depvar' `educvar' `spec' if male==`g'
+    eststo: ivregress 2sls `depvar' `spec' (`educvar' = i.birthquarter#i.birthyear) if male==`g'
+}
+}
+/* table creation code omitted */
