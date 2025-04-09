@@ -32,7 +32,7 @@
   morestring=[b]``
 }
 
-\input{latex/listings-stata}
+\input{listings-stata}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -42,7 +42,7 @@
 \usepackage{environ} % Required for defining new environments
 \usepackage{lipsum}
 \usepackage{acronym}
-\input{latex/acrodefs}
+\input{acrodefs}
 
 \definecolor{lightgray}{gray}{0.9}
 \definecolor{darkblue}{rgb}{0, 0, 0.5}
@@ -97,7 +97,7 @@
   \vspace*{0.4in}
 
 \begin{abstract}
-\input{latex/abstract}
+\input{abstract}
 \end{abstract}
 \end{center}
 
@@ -160,7 +160,7 @@ These pilot projects had two key goals, and a secondary benefit. The first goal 
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{figs/SSB Flow.png}
+    \includegraphics[width=\textwidth]{SSB Flow.png}
     % https://lucid.app/lucidchart/0d1b7aed-5a41-4f0b-9b84-adf0b7693d36/edit?view_items=VfP~hxQ8Izjc&invitationId=inv_315a286a-8880-4df0-8c68-267aefd99a79
     \caption{Process flow of validation using the Synthetic Data Server}
     \label{fig:ssb-flow}
@@ -188,7 +188,7 @@ even more researchers only ``tried out'' the data. While over 100 researchers we
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\textwidth]{figs/accounts-2015.png}
+    \includegraphics[width=0.8\textwidth]{accounts-2015.png}
     \caption{Computer accounts on the SDS over time}
     \label{fig:growth_in_sds}
 \end{figure}
@@ -196,7 +196,7 @@ even more researchers only ``tried out'' the data. While over 100 researchers we
 \begin{table}[]
     \centering
     \begin{threeparttable}
-        \input{latex/table-coverage}
+        \input{table-coverage}
         \caption{Distribution of Parameter-specific Confidence Interval Overlap, for selected projects}
         \label{tab:overlap}
         \begin{tablenotes}
@@ -213,7 +213,7 @@ More interestingly, multiple authors treated the synthetic data access as a gate
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.5\linewidth]{figs/useRDCgraph.png}
+    \includegraphics[width=0.5\linewidth]{useRDCgraph.png}
     \caption{SDS users and access to FSRDC}
     \label{fig:useRDC}
 \end{figure}
@@ -399,7 +399,7 @@ The agency can do all the usual checks on the (plaintext) statistical code, and 
 
 \begin{figure}[hbt]
     \centering
-    \includegraphics[width=1\linewidth]{figs/diff-wide-dockerfile.png}
+    \includegraphics[width=1\linewidth]{diff-wide-dockerfile.png}
     \caption{Checking modifications to user-provided container recipe}
     \label{fig:docker-diff}
 \end{figure}
@@ -468,7 +468,7 @@ Once results have been generated, the usual disclosure avoidance workflow at the
 
 \begin{figure}
     \centering
-    \includegraphics[width=1\linewidth]{figs/NBER Docker Flow.png}
+    \includegraphics[width=1\linewidth]{NBER Docker Flow.png}
     % https://lucid.app/lucidchart/fe96a5a2-871b-468b-9bc3-b77fc6252b90/edit?viewport_loc=1150%2C-408%2C2735%2C1495%2Cm-5o7ONTd-nK&invitationId=inv_768c8ae5-f478-45d5-9886-068f7faf5d4b
     \caption{Sketch of a Docker-based workflow for validation of researcher code}
     \label{fig:docker-workflow}
@@ -605,6 +605,6 @@ LV conceived the topic, wrote the text, and prepared the examples. The statistic
 % Please do not modify anything below this line.
 \printbibliography
 
-\input{latex/responses.tex}
+\input{responses.tex}
 
 \end{document}
