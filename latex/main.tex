@@ -2,7 +2,7 @@
 %    Harvard Data Science Review Latex Template    %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[]{hdsr}
+\documentclass[inline]{hdsr}
 
 %Graphics should all go in the figs/ directory
 \graphicspath{{figs/}}
@@ -10,6 +10,7 @@
 \usepackage{threeparttable}
 \usepackage{booktabs}
 \usepackage{float}
+
 
 \usepackage{listings}
 \lstset{basicstyle=\color{NavyBlue}\ttfamily,
@@ -132,7 +133,7 @@ Part of the concern is that the application of confidentiality methods may preve
 This article will set out to combine various lessons learned from both the literature and past experiments in a variety of domains to propose an alternative or complementary approach to providing access to confidential data via synthetic data. I draw on lessons learned from the analysis of several thousand replication package in economics \citep{vilhuber_report_2025}, from past efforts to create custom (`bespoke') synthetic data \citep{nowok_providing_2017}, from current technology that allows for reliably reproducible analysis \citep[\textbf{containers}, see ][for an introduction]{boettiger_introduction_2015}, and the feedback of hundreds of potential users of synthetic data in a project I co-lead until 2022 \citep{vilhuber_end_2022}. The proposed mechanism will allow to relax some of the analytical validity of the synthetic data, but in exchange allow for rapid turnaround time for analyses, something that researchers value. A maintained assumption, informed by observing similar usages and from our own experience, is that the cost of such a system is dramatically lower, and can thus be feasibly implemented by budget-constrained federal agencies. 
 
 
-I will start by defining what container technology is, what particular definition of synthetic data I have in mind, and what validation and verification servers are in the social science space. I will then lay out how the fact that containers can create portable and reproducible environments can be leveraged to simplify the validation of code, allowing researchers to develop models on synthetic data, and validate on confidential data, at scale, while maintaining the confidentiality promises that custodians give to their respondents. I then discuss a concrete but to this day theoretical example, and consider advantages and (key) limitations to the mechanism. The combination of containers with a relaxation of the quality of synthetic data can allow data custodians --- survey institutes or statistical agencies --- to scale up access by researchers at substantially lower cost than currently implemented.
+I will start by defining what container technology is, what particular definition of synthetic data I have in mind, and what validation and verification servers are in the social science space. I will then lay out how the fact that containers can create portable and reproducible environments can be leveraged to simplify the validation of code, allowing researchers to develop models on synthetic data, and validate on confidential data, at scale, while maintaining the confidentiality promises that custodians give to their respondents. I then discuss a concrete but to this day theoretical example, and consider advantages and (key) limitations to the mechanism. The combination of containers with a relaxation of the quality of synthetic data can allow data custodians --- survey institutes or statistical agencies --- to scale up access by researchers at substantially lower cost than currently implemented. In concluding, I discuss some possible extensions, including how to embed stronger privacy-protection methods such as differential privacy into both analysis and release of results.\footnote{At the time of this writing, at least one other project, much more ambitious and complex, has been under development for a few years, and is testing a ``privacy-preserving validation server'' \citep{burman2018,tyagi_privacy-preserving_2024}. I will briefly discuss the contrast to the present proposal in the discussion.}
 
 \section{Concepts and Definitions}
 
@@ -239,7 +240,7 @@ In a sample of over 8,000 replication packages associated with high-profile econ
 
 Drawing on the experience from the SDS pilot projects and other remote access methods used in the past, as well as looking at newer technologies that have emerged in the last decade, I suggest that a new, scalable mechanism to provide access to confidential data should have the following desirable characteristics:
 
-\begin{enumerate}
+\begin{enumerate}[label={[D\arabic*]}]
     \item the mechanism must support arbitrary modeling approaches and ideally a large number of programming languages
     \item the mechanism must allow for development of models by researchers that are close to their ``normal'' method of developing models
     \item the mechanism must be low-cost for the data provider, scaling at best sub-linearly with the number of users of those datasets
@@ -248,7 +249,7 @@ Drawing on the experience from the SDS pilot projects and other remote access me
     \item validation, if necessary, must be fast - on the order of hours
 \end{enumerate}
 
-Note that public-use data, as historically provided by statistical agencies, satisfies all of these criteria, except for the last one. Should statistical agencies actually offer validation even for such public use data, as \citet{reiter_verification_2009} have argued? Traditionally, they do not, and leave it up to individual researchers to ``self-validate'' by requesting access to confidential data in a time-consuming fashion.\footnote{See \cite{armour_using_2016} for one example of such a project, affecting the widely-used Current Population Survey.}
+Note that public-use data, as historically provided by statistical agencies, satisfies all of these criteria, except for the last one. Should statistical agencies actually offer validation even for such public use data, as \citet{reiter_verification_2009} have argued? Traditionally, they do not, and leave it up to individual researchers to ``self-validate'' by requesting access to confidential data in a time-consuming fashion.\footnote{See \citet{armour_using_2016} for one example of such a project, affecting the widely-used Current Population Survey.}
 
 \section{A Proposal using Containers}
 \label{sec:proposal}
@@ -525,20 +526,37 @@ As an added benefit, by compiling a library of container-based scientific uses o
 
 \section{Discussion}
 
-(Return to desiderata here, provide guidance on compromises)
 
-The use of containers ensures reproducibility, reliable portability, and enables scalability. The use of cloud-based commercial services requires no infrastructure or software maintenance by either data provider or users. In fact,  users  can easily provide their own infrastructure (e.g. user-provided standard computers). Providing evidence of successful reproducibility (validation) may require the use of third parties, such as aforementioned commercial providers, but also universities or other research institutions. With very little effort, automation is possible (potentially through web forms), and the only likely constraint to full automation is the absence of automated output vetting algorithms. 
-
-Thus, containers satisfy most of the desiderata outlined earlier, but still rely on high-quality synthetic data, and a privacy-protection mechanism that can scale. If such a privacy-protection mechanism can be tuned to acceptable protection levels (on par with traditional mechanisms that are applied to unrestricted public-use products), then validation can be made highly automated, and the quality of the synthetic data itself can be decreased, while maintaining high levels of user acceptance due to a fast validation process.
-
-% \begin{itemize}
+% \begin{enumerate}
 %     \item the mechanism must support arbitrary modeling approaches and ideally a large number of programming languages
 %     \item the mechanism must allow for development of models by researchers that are close to their ``normal'' method of developing models
 %     \item the mechanism must be low-cost for the data provider, scaling at best sub-linearly with the number of users of those datasets
 %     \item the mechanism must be low-cost for the data user, imposing at best marginal costs on their existing research infrastructure (software, computers)
 %     \item the privacy-protected data provided as part of such mechanisms must be good enough to allow for complex modeling
 %     \item validation, if necessary, must be fast - on the order of hours
-% \end{itemize}
+% \end{enumerate}
+
+
+
+Thus, containers satisfy most of the desiderata outlined earlier: 
+\begin{enumerate*}[label={[D\arabic*]}, itemjoin={{; }}, itemjoin*={{, and }}]
+    \item the Docker-based mechanism supports arbitrary modeling approaches, and in principle a large number of programming languages (modulo what the agency allows)
+    \item the Docker-based mechanism  allows for development of models by researchers on their personal computer, if necessary, as long as they subsequently test their model within the prescribed Docker-based mechanism themselves
+    \item the mechanism is low-cost (or even at no cost) for the data provider, and can be scaled up effectively; the costs are born by the compute providers (and possibly charged to the user)
+    \item the mechanism can be low-cost for the data user: Most current cloud computing solutions that support this are at a trivial cost to the data user, and may be born by their institution (academic or otherwise). Alternatively, development on their own personal computer imposes no additional cost
+    \item current privacy-protected data (SynLBD, SSB) are  good enough to allow for complex modeling, and the low-cost nature of the validation process allows for the development of additional synthetic data releases that trade off statistical accuracy for modeling utility, which is likely to be much simpler
+    \item validation can be technically fast, albeit with a caveat.
+\end{enumerate*}
+
+Two caveats are in order. First, [D5] is contingent on finding an acceptable mechanism to rapidly generate useful synthetic data, possibly model-dependent. Tools for that exist \citep{synthpop,synthpop2016}, and the disclosure-avoidance analysis is improving \citep{SnokeEtAl2017}. However, in order for validation not just to be fast to process, but also fast to release to the user ([D6]), agencies need to accept and deploy privacy-protection mechanism that can scale. Current mechanisms in restricted-access data centers (FSRDC, \ac{CRDCN}, \ac{FDZ}) are often manual \citep{brandt_guidelines_2010}, albeit first attempts at using \acp{LLM} to speed up the process are being actively developed \citep{rigaud_checking_2023}.
+
+\citet{barrientos_differentially_2021}
+
+\citep{burman2018,tyagi_privacy-preserving_2024}
+
+\citep{alabi_hypothesis_2022,sheffet_differentially_2019,alabi_differentially_2023,chaudhuri_privacy-preserving_2008,alabi_differentially_2020}
+
+The use of containers for validation of analyses that were prepared using synthetic data ensures reproducibility, reliable portability, and enables scalability. The use of cloud-based commercial or university-based services requires no infrastructure or software maintenance by either data provider or users, and often no direct cost.  With very little effort, automation is possible (potentially through web forms), and the only likely  If   privacy-protection mechanisms can be tuned to acceptable protection levels (on par with traditional mechanisms that are applied to unrestricted public-use products), then validation can be made highly automated, and the quality of the synthetic data itself can be decreased, while maintaining high levels of user acceptance due to a fast validation process.
 
 
 
@@ -561,15 +579,14 @@ Thus, containers satisfy most of the desiderata outlined earlier, but still rely
 
 
 
-
-\subsection*{Disclosure Statement}
+\section*{Disclosure Statement}
 The author has no conflicts of interest to declare. The mention of commercial entities is not meant to endorse any such providers, and the author holds no financial interest in any of the mentioned commercial entities.
 
-\subsection*{Acknowledgments}
+\section*{Acknowledgments}
 
 I have benefited from discussions with many folks, including Gary Benedetto, John Abowd, Rob Sienkiewicz, and from feedback following presentations to the National Academies, Census Bureau, and at the NBER conference on ``Data Privacy Protection and the Conduct of Applied Research.'' The original development of the idea was partially funded by \href{https://sloan.org/grant-detail/6845}{Alfred P. Sloan Foundation Grant G-2015-13903}.
 
-\subsection*{Contributions}
+\section*{Contributions}
 
 LV conceived the topic, wrote the text, and prepared the examples. The statistical code used within the container, serving as a stand-in for any statistical analysis, was provided by Evan Totty, U.S. Census Bureau.  
 

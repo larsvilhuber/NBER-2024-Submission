@@ -16,9 +16,15 @@
     \begin{itemize}
         \item I have added a new introduction that lays out what the article intends to convey, and what tools it will describe. This should help make it clearer from the start, and should have been included; my apologies for only adding it now.
         \item I then follow with a section that describes and situates the various concepts, both those that might be new to some in the readership (``containers'') and those that might be known, but possibly ambiguously defined and used in a broader context (first among them: ``synthetic data''). This was a request by multiple reviewers, suggesting that it is still a necessary structure to provide. I will note that I had previously talked with others in the open (social) science field, who very much implied that even the late definition of containers was ``very pedantic'' because apparently everybody (should) know about that by now... highlighting the wide diversity in information dispersal even within the narrow "field" of social science. I hope that the current definitions strike a good balance.
-        \item I have also replaced Figure 1 with a better figure, referenced it in the text, and added Figure 5, which shows the equivalent process flow for the Docker-based approach.
+        \item I have also replaced Figure 1 with a better figure, referenced it in the text, and added Figure 5, which shows the equivalent process flow for the Docker-based approach. For reference, here are the old Figure 1 and the new Figure 1 side-by-side (Figure~\ref{fig:comparision}.
     \end{itemize}
 \end{response}
+
+\begin{figure}
+\includegraphics[width=0.45\textwidth]{figs/SyntheticDataCycle.png}
+\includegraphics[width=0.45\textwidth]{figs/SSB Flow.png}
+\caption{\label{fig:comparision}Old and new Figure 1}
+\end{figure}
 
 %\subsection*{To editor}
 \textbf{To editor} 
@@ -53,7 +59,14 @@ demanding or idealistic might choose to ignore it.
 \end{referee}
 
 \begin{response}
-    I address this in an expanded conclusion.
+    This was actually, somewhat obliquely and apparently not clearly, included in the Conclusion:
+
+    \begin{quote}
+        Thus, containers satisfy most of the desiderata outlined earlier, but still rely on high-quality synthetic data, and a privacy-protection mechanism that can scale.
+    \end{quote}
+    
+    
+    \noindent I address this (hopefully) better in an greatly expanded conclusion/discussion, where I also address many of Reviewer 1's excellent points.
 
     \vspace{1em} I have also linked the various code fragments more closely to the text, explaining in more detail what they do, for those not necessarily familiar with the code. I have also corrected a few inaccuracies not noted by the referees when describing the setup of the container in the example.
 \end{response}
