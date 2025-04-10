@@ -1,12 +1,6 @@
 \newpage
 \section*{Responses}
 
-\begin{itemize}
-
-\item Idea is akin to holdout samples (in computer science, but also social sciences \citep{liu_successes_2019}) 
-\item "common task framework": research design from machine learning called the common task method \citep{donoho_50_2017,liberman_obituary_2010}. The common task method involves three main elements: a common target for predictive modeling, a common error metric, and a common data set with both training data available to participants and held-out data used for evaluation. \citep{liu_successes_2019}
-
-\end{itemize}
 
 \textbf{General responses}
 
@@ -17,15 +11,17 @@
         \item I have added a new introduction that lays out what the article intends to convey, and what tools it will describe. This should help make it clearer from the start, and should have been included; my apologies for only adding it now.
         \item I then follow with a section that describes and situates the various concepts, both those that might be new to some in the readership (``containers'') and those that might be known, but possibly ambiguously defined and used in a broader context (first among them: ``synthetic data''). This was a request by multiple reviewers, suggesting that it is still a necessary structure to provide. I will note that I had previously talked with others in the open (social) science field, who very much implied that even the late definition of containers was ``very pedantic'' because apparently everybody (should) know about that by now... highlighting the wide diversity in information dispersal even within the narrow "field" of social science. I hope that the current definitions strike a good balance.
         \item I have also replaced Figure 1 with a better figure, referenced it in the text, and added Figure 5, which shows the equivalent process flow for the Docker-based approach. For reference, here are the old Figure 1 and the new Figure 1 side-by-side (Figure~\ref{fig:comparision}.
+        \item     I have also linked the various code fragments more closely to the text, explaining in more detail what they do, for those not necessarily familiar with the code. I have also corrected a few inaccuracies not noted by the referees when describing the setup of the container in the example. A link to a complete online example is provided.
     \end{itemize}
 \end{response}
 
-\begin{figure}
+\begin{figure}[hbt]
 \includegraphics[width=0.45\textwidth]{figs/SyntheticDataCycle.png}
 \includegraphics[width=0.45\textwidth]{figs/SSB Flow.png}
 \caption{\label{fig:comparision}Old and new Figure 1}
 \end{figure}
 
+\newpage
 %\subsection*{To editor}
 \textbf{To editor} 
 
@@ -68,10 +64,10 @@ demanding or idealistic might choose to ignore it.
     
     \noindent I address this (hopefully) better in an greatly expanded conclusion/discussion, where I also address many of Reviewer 1's excellent points.
 
-    \vspace{1em} I have also linked the various code fragments more closely to the text, explaining in more detail what they do, for those not necessarily familiar with the code. I have also corrected a few inaccuracies not noted by the referees when describing the setup of the container in the example.
+
 \end{response}
 
-
+\newpage
 \textbf{Reviewer 1:}
 
 \begin{referee}
@@ -110,7 +106,7 @@ A valuable addition to the manuscript would be a subsection (or adding some para
 \end{referee}
 
 \begin{response}
-    Thank you for that suggestion. We did actually include the first two of those metrics in our grant application, and \textbf{I have expanded what was previously called a Conclusion} (somewhat presumptively), which is now \textbf{Discussion}, discussing the desiderata (as requested by the Editor) and these metrics. While I don't (here) expound on the survey for required tools, I do mention that institutions should be aware of the tools being used in the community that they serve, for instance by looking at the distribution of software used in replication packages. 
+    Thank you for that suggestion. We did actually include the first two of those metrics in our grant application, and \textbf{I have expanded what was previously called a Conclusion} (somewhat presumptively), which is now \textbf{Discussion}, discussing the desiderata (as requested by the Editor) and these metrics. While I don't (here) expound on the survey for required tools, I do mention that institutions should be aware of the tools being used in the community that they serve, for instance by looking at the distribution of software used in replication packages. I do point out that it might not be so constraining, using the example of SAS. There is almost no SAS usage left on university campuses, at least in the social sciences, yet many replication packages that contain code run in government research data centers still contain SAS. Researchers are willing to learn new software if it gives them access to data.
 \end{response}
 
 \begin{referee}
@@ -144,7 +140,7 @@ A valuable addition to the manuscript would be a subsection (or adding some para
 \end{referee}
 
 \begin{response}
-    This is a good point, though I subject this to the Editor's filter of how long an article should be. I now explicitly link to the Github repository with the complete example, and have added comments there, as a hopefully acceptable compromise.
+    I have expanded this discussion somewhat in the text, hopefully to the reviewer's satisfaction.
 \end{response}
 
 \begin{referee}
@@ -153,7 +149,7 @@ A valuable addition to the manuscript would be a subsection (or adding some para
 \end{referee}
 
 \begin{response}
-    TBD
+    I have added a brief discussion of how this might work if disclosure-avoidance could be incorporated into such a system. At a simple level, the impact of disclosure avoidance should be assessed ex-ante
 \end{response}
 
 \begin{referee}

@@ -10,7 +10,10 @@
 \usepackage{threeparttable}
 \usepackage{booktabs}
 \usepackage{float}
-
+\AtEveryCitekey{%
+  \clearfield{note}%
+  \clearfield{month}
+}
 
 \usepackage{listings}
 \lstset{basicstyle=\color{NavyBlue}\ttfamily,
@@ -109,22 +112,19 @@
 \copyrightnotice
 
 \section*{Media Summary}
-The Media Summary should be written in plain language to highlight the key messages of
-the article, in ways that can be understood by the general public and cited by the media 
-directly and accurately.  It therefore should avoid technical terms or language designed for
-academic communications. It should not exceed 400 words, and more succinct, the better.
+Vilhuber describes how researchers have used synthetic data as a proxy access to confidential data in the past. Such systems have been long and expensive to develop, because trying to satisfy many different constraints on their suitability imposed by users. Instead, he suggests that modern containers --- simulations of entire computer and software systems --- could be leveraged as a portable, scalable, and cheaper replacement system. By packaging lower quality synthetic data in prescribed environments, and allowing users and commercial providers to support their use, then providing rapid turnaround on validation against the actual confidential data, monetary and time costs of the system for both providers and end users can be substantially reduced. 
 
 \section*{Introduction}
 \label{intro}
 
-Summary of what I set out to do:
+% Summary of what I set out to do:
 
-\begin{itemize}
-    \item High-quality (analytically valid) synthetic data, prepared as a way to grant researchers indirect access to confidential data, are costly to produce.
-    \item Validation (running the code prepared on synthetic data on confidential data to validate the results) is akin to reproducibility checks, and hard.
-    \item Containers are a way to address the reproducibility problem, but may, in general, be too prescriptive.
-    \item In the context of providing access, the compromise of a prescriptive container may be an acceptable tradeoff, allowing for the production of lower-quality synthetic data in exchange for less error-prone and therefore faster validation processes
-\end{itemize}
+% \begin{itemize}
+%     \item High-quality (analytically valid) synthetic data, prepared as a way to grant researchers indirect access to confidential data, are costly to produce.
+%     \item Validation (running the code prepared on synthetic data on confidential data to validate the results) is akin to reproducibility checks, and hard.
+%     \item Containers are a way to address the reproducibility problem, but may, in general, be too prescriptive.
+%     \item In the context of providing access, the compromise of a prescriptive container may be an acceptable tradeoff, allowing for the production of lower-quality synthetic data in exchange for less error-prone and therefore faster validation processes
+% \end{itemize}
 
 Concerns about confidentiality in statistical products have increased in the past several years. While the new disclosure avoidance techniques introduced for the 2020 United States Decennial Census \citep{abowd_2020_2022} garnered much attention, the academic community also expressed concerns about agency plans to apply formal disclosure avoidance techniques to \acp{PUMF}, and after an initial announcement, the Census Bureau delayed implementation of such methods for the \ac{ACS} \citep{daily_disclosure_2022}. 
 
@@ -139,7 +139,7 @@ I will start by defining what container technology is, what particular definitio
 
 \subsection{Containers}
 
-Containers, often referred to using the name of a particular implementation by a commercial provider (Docker), are technology most often, but not exclusively associated with Linux, which enables computer processes and code libraries to be bundled and constrained. In essence, a container is a bundle of all the dependencies and code an app, or a researcher's statistical analysis, needs, into a single compact file, which can then be run on any computer without (much) further ado. They can also contain the data necessary for such computations, though there is also the ability to inject components --- such as researcher-specific code or data --- at the time a container is run. Containers can be hosted on a cloud platform, but can also run individually on researcher compute platforms (laptops).  They have been primarily developed to allow for lightweight but massive scaling of internet applications, which requires the same process be re-executed in a reliable fashion, i.e., in a reproducible fashion. This latter aspect is what has made it attractive for academic researchers as well, and containers have been put forward as a mechanism for reproducible research for nearly a decade at this point \citep{boettiger_introduction_2015}, with various commercial and academic services arising around the use of containers \citep{clyburne-sherin_computational_2019,chard_toward_2020,brinckman_computing_2018}. Alternatives to Docker containers are Apptainer \citep{contributors_to_the_apptainer_project_apptainer_2025}, various Docker-compatible Linux implementations, or even BSD ``jails'' \citep{the_freebsd_project_chapter_2025}.\footnote{There are container implementations for computers running Windows and macOS, typically running within a virtual machine (a simulated computer) running Linux. It is technically feasible to run a Windows container. Virtual machines are a more complex method of simulating an entire computer, but introduces more complexity in terms of the transparency, a key feature in this article.} 
+Containers, often referred to using the name of a particular implementation by a commercial provider (Docker), are technology most often, but not exclusively associated with Linux, which enables computer processes and code libraries to be bundled and constrained. In essence, a container is a bundle of all the dependencies and code an app, or a researcher's statistical analysis, needs, into a single compact file, which can then be run on any computer without (much) further ado. They can also contain the data necessary for such computations, though there is also the ability to inject components --- such as researcher-specific code or data --- at the time a container is run. Containers can be hosted on a cloud platform, but can also run individually on researcher compute platforms (personal computers).  They have been primarily developed to allow for lightweight but massive scaling of internet applications, which requires the same process be re-executed in a reliable fashion, i.e., in a reproducible fashion. This latter aspect is what has made it attractive for academic researchers as well, and containers have been put forward as a mechanism for reproducible research for nearly a decade at this point \citep{boettiger_introduction_2015}, with various commercial and academic services arising around the use of containers \citep{clyburne-sherin_computational_2019,chard_toward_2020,brinckman_computing_2018}. Alternatives to Docker containers are Apptainer \citep{contributors_to_the_apptainer_project_apptainer_2025}, various Docker-compatible Linux implementations, or even BSD ``jails'' \citep{the_freebsd_project_chapter_2025}.\footnote{There are container implementations for computers running Windows and macOS, typically running within a virtual machine (a simulated computer) running Linux. It is technically feasible to run a Windows container. Virtual machines are a more complex method of simulating an entire computer, but introduces more complexity in terms of the transparency, a key feature in this article.} 
 
 Container usage in the context of confidential data in the social sciences or in statistical agencies is sparse, to the best of my knowledge. Containers themselves are not inherently secure, and need to be managed appropriately to ensure complete privacy and security are not compromised \citep[see][]{souppaya_application_2017}, though that is fundamentally similar to the fundamental IT security considerations all hosts of confidential data must implement.\footnote{Considerations include compliance with \ac{GDPR} or \ac{HIPAA}.} In this article, I do not address container security per se, and in fact, as I will outline in an example later, container usage in the confidential environment is not necessary, albeit possibly convenient.  
 
@@ -460,7 +460,7 @@ To run the provided capsule on confidential data, the confidential data director
            ]{docker-run-conf.txt}
 
 
-
+\noindent However, it should be noted that the container does not have to be used for the validation. If the internal computing environment is faithfully reproduced by the container environment, then simply running the code, in combination with the \texttt{config-confidential.do}, may be sufficient. Thus, while containers are key to providing a user-facing environment, they are not a necessary condition for use within the existing secure computing environment.
 
 \subsection{Sending results back to user: output vetting}
 
@@ -536,9 +536,9 @@ As an added benefit, by compiling a library of container-based scientific uses o
 %     \item validation, if necessary, must be fast - on the order of hours
 % \end{enumerate}
 
+\subsection{Returning to the desiderata}
 
-
-Thus, containers satisfy most of the desiderata outlined earlier: 
+Containers satisfy most of the desiderata outlined earlier: 
 \begin{enumerate*}[label={[D\arabic*]}, itemjoin={{; }}, itemjoin*={{, and }}]
     \item the Docker-based mechanism supports arbitrary modeling approaches, and in principle a large number of programming languages (modulo what the agency allows)
     \item the Docker-based mechanism  allows for development of models by researchers on their personal computer, if necessary, as long as they subsequently test their model within the prescribed Docker-based mechanism themselves
@@ -548,13 +548,33 @@ Thus, containers satisfy most of the desiderata outlined earlier:
     \item validation can be technically fast, albeit with a caveat.
 \end{enumerate*}
 
+\subsection{Some caveats}
+
 Two caveats are in order. First, [D5] is contingent on finding an acceptable mechanism to rapidly generate useful synthetic data, possibly model-dependent. Tools for that exist \citep{synthpop,synthpop2016}, and the disclosure-avoidance analysis is improving \citep{SnokeEtAl2017}. However, in order for validation not just to be fast to process, but also fast to release to the user ([D6]), agencies need to accept and deploy privacy-protection mechanism that can scale. Current mechanisms in restricted-access data centers (FSRDC, \ac{CRDCN}, \ac{FDZ}) are often manual \citep{brandt_guidelines_2010}, albeit first attempts at using \acp{LLM} to speed up the process are being actively developed \citep{rigaud_checking_2023}.
 
-\citet{barrientos_differentially_2021}
+\subsection{Addressing implementation issues}
 
-\citep{burman2018,tyagi_privacy-preserving_2024}
+While much of the technology is straightforward ``off-the-rack'' technology, the fact that it is not being used by statistical agencies or survey institutes suggests that some training is required and guidelines for deployment needed. 
+%
+\begin{enumerate*}[label={(\arabic*)}, itemjoin={{ }}]
+\item Guidelines for agencies on how to prepare container specifications reflective of their internal execution environment, taking into account industry best practices on container specifications, security considerations, and usability are a necessity. NIST has some guidelines \citep{souppaya_application_2017}, and guidelines for secure use of containers for applications abound, and can be easily adapted to internal use at agencies. What is less available are guidelines on how to publish such containers for public consumption, these will likely need to be developed, possibly in conjunction with the target audience.
 
-\citep{alabi_hypothesis_2022,sheffet_differentially_2019,alabi_differentially_2023,chaudhuri_privacy-preserving_2008,alabi_differentially_2020}
+\item Users may need some guidance on general use of containers, and how to use containers in conjunction with this mechanism. There are many training documents and class notes available for general use of containers \citep{boettiger_introduction_2015,nust_automatically_2017,mcdermott_data_2023,the_turing_way_community_containers_2024,eyers_reproducible_2020,docker-stata,aea_data_editor_use_2021}, but few of them are actually known to most (academic) social scientists. How to use this specifically for the purpose of validation may need some training, though I suspect less so then the use of an idiosyncratic desktop platform that is even less familiar to users, as the \ac{SDS} was. Financial incentives might be used for a pilot phase.  
+\end{enumerate*}
+
+\subsection{How do we know it works?}
+% metrics
+
+The premise of my proposal is that it is easier and cheaper to implement. At present, the creation of highly protective synthetic data, and the supporting infrastructure for validation, is complex and therefore expensive.\footnote{The \ac{SDS} was supported by Sloan Foundation and \ac{NSF} grants as well as Census Bureau staff time over more than a decade, and the aforementioned project for synthetic IRS data is supported through grants by the Sloan Foundation, each of which was typically a multi-year project with cumulatively several million dollar support.} How would we know if this is cheaper? Implementing  agencies could track how much time was spent on submissions that were submitted with manual validation, how much time is spent managing complex data access protocols (when researchers themselves need to access the confidential data), and compare that to automated submissions under the current proposal (ideally in a randomized experiment),  allowing an assessment of the first-order impact on costs at the agency. Other cost factors might apply as well, for instance if the agency does not currently use containers, implementation costs of deploying software to manage submissions in such an automated way. IT personnel hopefully is aware of what it means to run containers within a large organization, but may need to adapt it to the particular research environment.  Non-pecuniary metrics might include the increase in usage of datasets, as well as in the number of validation requests. Second-order cost increases through expanded use remain hard to measure, and would need to be assessed in a broader cost-benefit analysis. Security and cost considerations might also affect the allowable set of software that can be used in containers, though it is an open question whether restricting users to specific software packages truly is an impediment to data use.\footnote{Observationally, the usage of SAS in the broader academic community in the social sciences is approximately zero, yet many replication packages that are associated with \ac{FSRDC} or \ac{CRDCN} projects still contain SAS code.}
+
+\subsection{Possible extensions to more complex frameworks}
+
+A critical bottleneck is disclosure avoidance, in part because the traditional analysis methods (both of public-use data and of synthetic data) are disclosure-avoidance agnostic, i.e., they do not incorporate prior or subsequent disclosure avoidance measures into the analysis method \citep{AbowdSchmutte_BPEA2015}. A first step is to include in the analysis container methods and metrics that allow users to assess how subsequent disclosure avoidance metrics will impact the releasable tables \citep{ReiterJPC2010}. For instance, prepared methods to apply traditional disclosure methods to the designated outputs \citep[aggregation, suppression, rounding, see][]{brandt_guidelines_2010} can be incorporated into the container. The \ac{SDS} already allowed to assess inference when combining estimates from multiple synthetic datasets (the \ac{SSB} provides four implicates). 
+
+Applying methods that incorporate diffential privacy directly into the analysis methods \citep{alabi_hypothesis_2022,sheffet_differentially_2019,alabi_differentially_2023,chaudhuri_privacy-preserving_2008,alabi_differentially_2020} still provide incomplete coverage of the analysis methods used by social scientists \citep[see ][ for an overview]{barrientos_differentially_2021}. A promising but still preliminary system at this time is the IRS synthetic data file 
+\citep{burman2018,tyagi_privacy-preserving_2024}. Whether such a system can be implemented with a simple container-based approach as outlined here remains to be seen. 
+
+\section{In conclusion}
 
 The use of containers for validation of analyses that were prepared using synthetic data ensures reproducibility, reliable portability, and enables scalability. The use of cloud-based commercial or university-based services requires no infrastructure or software maintenance by either data provider or users, and often no direct cost.  With very little effort, automation is possible (potentially through web forms), and the only likely  If   privacy-protection mechanisms can be tuned to acceptable protection levels (on par with traditional mechanisms that are applied to unrestricted public-use products), then validation can be made highly automated, and the quality of the synthetic data itself can be decreased, while maintaining high levels of user acceptance due to a fast validation process.
 
