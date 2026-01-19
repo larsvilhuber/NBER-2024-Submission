@@ -1,14 +1,14 @@
 #!/bin/bash
 
-OLDDIR=../NBER-old
-DIFFFILE=main.tex
+OLDFILE=nber-volume-vilhuber-old.tex
+DIFFFILE=nber-volume-vilhuber.tex
 OUTPUT=diff.tex
 
 LATEXDIFF_OPTS=
 
-latexdiff $LATEXDIFF_OPTS ${OLDDIR}/$DIFFFILE  $DIFFFILE > $OUTPUT 
+latexdiff $LATEXDIFF_OPTS ${OLDFILE} $DIFFFILE > $OUTPUT 
 pdflatex $OUTPUT
-biber $(basename $OUTPUT .tex)
+bibtex $(basename $OUTPUT .tex)
 pdflatex $OUTPUT
 pdflatex $OUTPUT
 
