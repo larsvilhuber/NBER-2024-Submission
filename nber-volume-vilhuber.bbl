@@ -1,0 +1,314 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  This bbl file is created by econ.bst ver.3.2
+%  The latest econ.bst is available at
+%  <https://github.com/ShiroTakeda/econ-bst>
+
+%%% Definition of \bysame
+\ifx\undefined\bysame
+\newcommand{\bysame}{\hskip.3em \leavevmode\rule[.5ex]{3em}{.3pt}\hskip0.5em}
+\fi
+
+\begin{thebibliography}{xxx}
+
+\harvarditem[Abowd and Schmutte]{Abowd and Schmutte}{2015}{abowd_economic_2015}
+Abowd, John~M and Ian~M Schmutte (2015) ``Economic {Analysis} and {Statistical}
+  {Disclosure} {Limitation},'' \textit{Brookings Papers on Economic Activity},
+  50 (1),  221--267,
+  \href{http://dx.doi.org/10.1353/eca.2016.0004}{\urlstyle{rm}
+  \nolinkurl{10.1353/eca.2016.0004}}.
+
+\harvarditem[Abowd et~al.]{Abowd, Stinson and
+  Benedetto}{2006}{abowd_final_2006}
+Abowd, John~M., Martha Stinson, and Gary Benedetto (2006) ``Final {Report} to
+  the {Social} {Security} {Administration} on the {SIPP}/{SSA}/{IRS} {Public}
+  {Use} {File} {Project},''Technical report, U.S. Census Bureau,
+  \url{http://hdl.handle.net/1813/43929}.
+
+\harvarditem[Abraham et~al.]{Abraham, Haltiwanger, Hou, Sandusky and
+  Spletzer}{2020}{abraham_reconciling_2020}
+Abraham, Katharine~G., John~C. Haltiwanger, Claire Hou, Kristin Sandusky, and
+  James~R. Spletzer (2020) ``Reconciling {Survey} and {Administrative}
+  {Measures} of {Self}-{Employment},'' \textit{Journal of Labor Economics},
+  \href{http://dx.doi.org/10.1086/712187}{\urlstyle{rm}
+  \nolinkurl{10.1086/712187}}.
+
+\harvarditem[Abraham et~al.]{Abraham, Haltiwanger, Sandusky and
+  Spletzer}{2013}{abraham_exploring_2013}
+Abraham, Katharine~G., John Haltiwanger, Kristin Sandusky, and James~R.
+  Spletzer (2013) ``Exploring {Differences} in {Employment} between {Household}
+  and {Establishment} {Data},'' \textit{Journal of Labor Economics}, 31 (S1),
+  S129--S172, \href{http://dx.doi.org/10.1086/669062}{\urlstyle{rm}
+  \nolinkurl{10.1086/669062}}.
+
+\harvarditem[Alexander et~al.]{Alexander, Davern and
+  Stevenson}{2010}{alexander_inaccurate_2010}
+Alexander, J.~Trent, Michael Davern, and Betsey Stevenson (2010) ``Inaccurate
+  {Age} and {Sex} {Data} in the {Census} {Pums} {Files}: {Evidence} and
+  {Implications},'' \textit{Public Opinion Quarterly}, 74 (3),  551--569,
+  \href{http://dx.doi.org/10.1093/poq/nfq033}{\urlstyle{rm}
+  \nolinkurl{10.1093/poq/nfq033}}.
+
+\harvarditem[{American Economic Association}]{{American Economic
+  Association}}{2016}{american_economic_association_allied_2016}
+{American Economic Association} (2016) ``Allied {Social} {Science}
+  {Associations} {Program},'' Program 2016, American Economic Association, San
+  Francisco, \url{https://assets.aeaweb.org/asset-server/files/815.pdf}.
+
+\harvarditem[Anderson]{Anderson}{2015}{anderson_american_2015}
+Anderson, Margo~J. (2015)  \textit{The {American} census: a social history},
+  New Haven: Yale University Press, second edition edition.
+
+\harvarditem[Armour et~al.]{Armour, Burkhauser and
+  Larrimore}{2016}{armour_using_2016}
+Armour, Philip, Richard~V. Burkhauser, and Jeff Larrimore (2016) ``Using The
+  {P}Areto Distribution To Improve Estimates Of Topcoded Earnings,''
+  \textit{Economic Inquiry}, 54 (2),  1263--1273,
+  \href{http://dx.doi.org/10.1111/ecin.12299}{\urlstyle{rm}
+  \nolinkurl{10.1111/ecin.12299}}.
+
+\harvarditem[Barrientos et~al.]{Barrientos
+  et~al.}{2018}{barrientos_providing_2018}
+Barrientos, Andrés~F., Alexander Bolton, Tom Balmat et~al. (2018) ``Providing
+  {Access} to {Confidential} {Research} {Data} {Through} {Synthesis} and
+  {Verification}: {An} {Application} to {Data} on {Employees} of the {U}.{S}.
+  {Federal} {Government},'' \textit{The Annals of Applied Statistics},
+  \href{http://dx.doi.org/10.1214/18-AOAS1194}{\urlstyle{rm}
+  \nolinkurl{10.1214/18-AOAS1194}}, arXiv: 1705.07872.
+
+\harvarditem[Benedetto et~al.]{Benedetto, Stinson and
+  Abowd}{2013}{Benedettoetal_2013}
+Benedetto, Gary, Martha Stinson, and John~M. Abowd (2013) ``The creation and
+  use of the {SIPP} {Synthetic} {Beta},'' unpublished document, U.S. Census
+  Bureau,
+  \url{http://www.census.gov/content/dam/Census/programs-surveys/sipp/methodology/SSBdescribe_nontechnical.pdf},
+  tex.timestamp: 2015.02.11.
+
+\harvarditem[Boettiger]{Boettiger}{2015}{boettiger_introduction_2015}
+Boettiger, Carl (2015) ``An introduction to {Docker} for reproducible
+  research,'' \textit{ACM SIGOPS Operating Systems Review}, 49 (1),  71--79,
+  \href{http://dx.doi.org/10.1145/2723872.2723882}{\urlstyle{rm}
+  \nolinkurl{10.1145/2723872.2723882}}.
+
+\harvarditem[Card et~al.]{Card, Chetty, Feldstein and
+  Saez}{2010}{card_expanding_2010}
+Card, David~E., Raj Chetty, Martin~S. Feldstein, and Emmanuel Saez (2010)
+  ``Expanding {Access} to {Administrative} {Data} for {Research} in the
+  {United} {States},'' \textit{SSRN Electronic Journal},
+  \href{http://dx.doi.org/10.2139/ssrn.1888586}{\urlstyle{rm}
+  \nolinkurl{10.2139/ssrn.1888586}}.
+
+\harvarditem[Carr et~al.]{Carr, Wiemers and Moffitt}{2023}{carr-nber-2023}
+Carr, Michael~D., Emily~E. Wiemers, and Robert~A. Moffitt (2023) ``Using
+  Synthetic Data to Estimate Earnings Dynamics: Evidence from the SIPP GSF and
+  SIPP SSB,'' presentation, NBER.
+
+\harvarditem[Cole et~al.]{Cole, Dhaliwal, Sautmann and
+  Vilhuber}{2021}{cole_handbook_2021}
+Cole, Shawn, Iqbal Dhaliwal, Anja Sautmann, and Lars Vilhuber (2021)
+  \textit{Handbook on {Using} {Administrative} {Data} for {Research} and
+  {Evidence}-based {Policy}}: Abdul Latif Jameel Poverty Action Lab,
+  \href{http://dx.doi.org/10.31485/admindatahandbook.1.0}{\urlstyle{rm}
+  \nolinkurl{10.31485/admindatahandbook.1.0}}.
+
+\harvarditem[Eyers et~al.]{Eyers, Stevens, Turner, Koch and
+  Cohen}{2020}{eyers_reproducible_2020}
+Eyers, D.~M., S.~L.~R. Stevens, A.~Turner, C.~Koch, and J.~Cohen (2020)
+  ``Reproducible {Computational} {Environments} {Using} {Containers},''
+  \url{https://carpentries-incubator.github.io/docker-introduction/}.
+
+\harvarditem[Graham and Vilhuber]{Graham and Vilhuber}{2025}{graham2025}
+Graham, David~J. and Lars Vilhuber (2025) ``Self-Checking Replication Packages:
+  {{Installing Docker}} on {{WSL}},''
+  \url{https://larsvilhuber.github.io/self-checking-reproducibility/81-docker-wsl.html}.
+
+\harvarditem[Guimarães]{Guimarães}{2023}{guimaraes_reproducibility_2023}
+Guimarães, Paulo (2023) ``Reproducibility {With} {Confidential} {Data}: {The}
+  {Experience} of {BPLIM},'' \textit{Harvard Data Science Review}, 5 (3),
+  \href{http://dx.doi.org/10.1162/99608f92.54a00239}{\urlstyle{rm}
+  \nolinkurl{10.1162/99608f92.54a00239}}.
+
+\harvarditem[Karr et~al.]{Karr, Kohnen, Oganian, Reiter and
+  Sanil}{2006}{tas2006}
+Karr, A.~F., C.~N. Kohnen, A.~Oganian, J.~P. Reiter, and A.~P. Sanil (2006) ``A
+  framework for evaluating the utility of data altered to protect
+  confidentiality,'' \textit{The American Statistician}, 60 (3),  1--9,
+  \href{http://dx.doi.org/10.1198/000313006X124640}{\urlstyle{rm}
+  \nolinkurl{10.1198/000313006X124640}}.
+
+\harvarditem[Kinney et~al.]{Kinney, Reiter and Miranda}{2014}{SJIAOS-2014d}
+Kinney, Satkartar~K., Jerome~P. Reiter, and Javier Miranda (2014) ``{Improving
+  The Synthetic Longitudinal Business Database},'' \textit{Statistical Journal
+  of the IAOS: Journal of the International Association for Official
+  Statistics}, 30 (2),
+  \href{http://dx.doi.org/10.3233/SJI-140808}{\urlstyle{rm}
+  \nolinkurl{10.3233/SJI-140808}}.
+
+\harvarditem[Kinney et~al.]{Kinney, Reiter, Reznek, Miranda, Jarmin and
+  Abowd}{2011}{KinneyEtAl2011}
+Kinney, Satkartar~K., Jerome~P. Reiter, Arnold~P. Reznek, Javier Miranda,
+  Ron~S. Jarmin, and John~M. Abowd (2011) ``Towards unrestricted public use
+  business microdata: {The} synthetic longitudinal business database,''
+  \textit{International Statistical Review}, 79 (3),  362--384,
+  \href{http://dx.doi.org/10.1111/j.1751-5823.2011.00153.x}{\urlstyle{rm}
+  \nolinkurl{10.1111/j.1751-5823.2011.00153.x}}, tex.owner: vilhuber
+  tex.publisher: Blackwell Publishing Ltd tex.timestamp: 2012.09.04.
+
+\harvarditem[Larrimore et~al.]{Larrimore, Burkhauser, Feng and
+  Zayatz}{2008}{larrimore_consistent_2008}
+Larrimore, Jeff, Richard~V. Burkhauser, Shuaizhang Feng, and Laura Zayatz
+  (2008) ``Consistent cell means for topcoded incomes in the public use march
+  {CPS} (1976–2007),'' \textit{Journal of Economic and Social Measurement},
+  33 (2-3),  89--128,
+  \href{http://dx.doi.org/10.3233/JEM-2008-0299}{\urlstyle{rm}
+  \nolinkurl{10.3233/JEM-2008-0299}}, Publisher: IOS Press.
+
+\harvarditem[McDermott]{McDermott}{2021}{mcdermott2021}
+McDermott, Grant (2021) ``Uo-Ec607/Lectures@1f55d21,''
+  \url{https://github.com/uo-ec607/lectures/commit/1f55d21d7a7a22f5ea6e6d59c865856fad40f197}.
+
+\harvarditem[Moreau et~al.]{Moreau, Wiebels and
+  Boettiger}{2023}{moreau_containers_2023}
+Moreau, David, Kristina Wiebels, and Carl Boettiger (2023) ``Containers for
+  computational reproducibility,'' \textit{Nature Reviews Methods Primers}, 3
+  (1),  1--16,
+  \href{http://dx.doi.org/10.1038/s43586-023-00236-9}{\urlstyle{rm}
+  \nolinkurl{10.1038/s43586-023-00236-9}}.
+
+\harvarditem[Raghunathan]{Raghunathan}{2021}{raghunathan_synthetic_2021}
+Raghunathan, Trivellore (2021) ``Synthetic {Data},'' \textit{Annual Review of
+  Statistics and Its Application}, 8 (1),  129--140,
+  \href{http://dx.doi.org/10.1146/annurev-statistics-040720-031848}{\urlstyle{rm}
+  \nolinkurl{10.1146/annurev-statistics-040720-031848}}.
+
+\harvarditem[Raghunathan and Chaney]{Raghunathan and
+  Chaney}{2023}{raghunathan_roadmap_2023b}
+Raghunathan, Trivellore and Bradford Chaney eds.  (2023)  \textit{A {Roadmap}
+  for {Disclosure} {Avoidance} in the {Survey} of {Income} and {Program}
+  {Participation}}, Washington, D.C.: National Academies Press,
+  \href{http://dx.doi.org/10.17226/27169}{\urlstyle{rm}
+  \nolinkurl{10.17226/27169}}, Pages: 27169.
+
+\harvarditem[Raghunathan and Hotz]{Raghunathan and Hotz}{2024}{raghu-nber-2024}
+Raghunathan, Trivellore and V.~Joseph Hotz (2024) ``A Roadmap for Disclosure
+  Avoidance in the Survey of Income and Program Participation SIPP,''
+  presentation, NBER.
+
+\harvarditem[Reeder et~al.]{Reeder, Stanley and
+  Vilhuber}{2018}{reeder_codebook_2018}
+Reeder, Lori~B., Jordan~C. Stanley, and Lars Vilhuber (2018) ``Codebook for the
+  {SIPP} {Synthetic} {Beta} v7.0 [{Codebook} file],'' {DDI}-{C} document,
+  Cornell University, Ithaca, NY, USA,
+  \url{http://www2.ncrn.cornell.edu/ced2ar-web/codebooks/ssb/v/v7}.
+
+\harvarditem[Reiter et~al.]{Reiter, Oganian and
+  Karr}{2009}{reiter_verification_2009}
+Reiter, Jerome~P, Anna Oganian, and Alan~F Karr (2009) ``Verification servers:
+  {Enabling} analysts to assess the quality of inferences from public use
+  data,'' \textit{Computational Statistics \& Data Analysis}, 53 (4),
+  1475--1482, \href{http://dx.doi.org/10.1016/j.csda.2008.10.006}{\urlstyle{rm}
+  \nolinkurl{10.1016/j.csda.2008.10.006}}.
+
+\harvarditem[Reiter and Park]{Reiter and Park}{2024a}{jerry-nber-2024}
+Reiter, Jerome~P. and Jennifer Park (2024a) ``Toward a 21st Century National
+  Data Infrastructure: Managing Privacy and Confidentiality Risks with Blended
+  Data,'' presentation, NBER.
+
+\harvarditem[Reiter and Park]{Reiter and Park}{2024b}{reiter_toward_2024b}
+\bysame  eds.  (2024b)  \textit{Toward a 21st {Century} {National} {Data}
+  {Infrastructure}: {Managing} {Privacy} and {Confidentiality} {Risks} with
+  {Blended} {Data}}, Washington, D.C.: National Academies Press,
+  \href{http://dx.doi.org/10.17226/27335}{\urlstyle{rm}
+  \nolinkurl{10.17226/27335}}, Pages: 27335.
+
+\harvarditem[Rubin]{Rubin}{1993}{rubin_discussion_1993}
+Rubin, Donald~B (1993) ``Discussion: {Statistical} disclosure limitation,''
+  \textit{Journal of Official Statistics}, 9 (2),  461--468,
+  \url{https://www.scb.se/contentassets/ca21efb41fee47d293bbee5bf7be7fb3/discussion-statistical-disclosure-limitation2.pdf}.
+
+\harvarditem[Schouten and Cigrang]{Schouten and
+  Cigrang}{2003}{schouten_remote_2003}
+Schouten, Barry and Marc Cigrang (2003) ``Remote access systems for statistical
+  analysis of microdata,''Technical Report 03004, Statistics Netherlands,
+  \url{https://www.oecd.org/std/37502934.pdf}.
+
+\harvarditem[Stanley and Totty]{Stanley and Totty}{2023}{totty-nber-2023}
+Stanley, Jordan~C. and Evan~S. Totty (2023) ``A Penny Synthesized is a Penny
+  Earned? An Exploratory Analysis of Accuracy in the SIPP Synthetic Beta,''
+  presentation, NBER.
+
+\harvarditem[{Turing Way Community}]{{Turing Way
+  Community}}{2024}{the_turing_way_community_containers_2024}
+{Turing Way Community} (2024) ``Containers,''
+  \url{https://book.the-turing-way.org/reproducible-research/renv/renv-containers}.
+
+\harvarditem[{United Nations}]{{United
+  Nations}}{2007}{united_nations_managing_2007}
+{United Nations} (2007) ``Managing statistical confidentiality and microdata
+  access - {Principles} and {Guidelines} of {Good} {Practice},''Technical
+  report, United Nations Economic Commission for Europe - Conference of
+  European Statisticians,
+  \url{https://www.unece.org/fileadmin/DAM/stats/publications/Managing.statistical.confidentiality.and.microdata.access.pdf}.
+
+\harvarditem[{U.S. Census Bureau}]{{U.S. Census
+  Bureau}}{2011}{us_census_bureau_synthetic_2011}
+{U.S. Census Bureau} (2011) ``Synthetic {LBD} {Beta} {Version} 2.0,''
+  [{Computer} file], Cornell University, Synthetic Data Server [distributor],
+  Washington,DC and Ithaca, NY, USA,
+  \url{http://www2.vrdc.cornell.edu/news/data/lbd-synthetic-data/}, Published:
+  Computer file.
+
+\harvarditem[{U.S. Census Bureau}]{{U.S. Census
+  Bureau}}{2015}{us_census_bureau_sipp_2015}
+\bysame  (2015) ``{SIPP} {Synthetic} {Beta} {Version} 7.0,'' [{Computer} file],
+  Cornell University, Washington,DC and Ithaca, NY, USA,
+  \url{http://www2.vrdc.cornell.edu/news/data/sipp-synthetic-beta-file/},
+  Published: Computer file.
+
+\harvarditem[Vilhuber]{Vilhuber}{2013}{vilhuber_codebook_2013}
+Vilhuber, Lars (2013) ``Codebook for the {Synthetic} {LBD} {Version} 2.0
+  [{Codebook} file],'' {DDI}-{C} document, Comprehensive Extensible Data
+  Documentation and Access Repository (CED2AR), Cornell Institute for Social
+  and Economic Research and Labor Dynamics Institute [distributor]. Cornell
+  University, Ithaca, NY, USA,
+  \url{http://www2.ncrn.cornell.edu/ced2ar-web/codebooks/synlbd/v/v2}.
+
+\harvarditem[Vilhuber]{Vilhuber}{2024a}{docker-stata}
+\bysame  (2024a) ``AEADataEditor/docker-stata,'' repository, {GitHub},
+  \url{https://github.com/AEADataEditor/docker-stata}.
+
+\harvarditem[Vilhuber]{Vilhuber}{2024b}{lars_vilhuber_aeadataeditordocker-aer-2023-0700_2024}
+\bysame  (2024b) ``{AEADataEditor}/docker-aer-2023-0700: {Docker} image for
+  software stack used in {AER}-2023-0700,'' April,
+  \href{http://dx.doi.org/10.5281/ZENODO.11080718}{\urlstyle{rm}
+  \nolinkurl{10.5281/ZENODO.11080718}}.
+
+\harvarditem[Vilhuber]{Vilhuber}{2025}{vilhuber2025e}
+\bysame  (2025) ``Using {{Containers}} to {{Validate Research}} on
+  {{Confidential Data}} at {{Scale}},'' \textit{Harvard Data Science Review},
+  \href{http://dx.doi.org/10.1162/99608f92.4d1853ce}{\urlstyle{rm}
+  \nolinkurl{10.1162/99608f92.4d1853ce}}.
+
+\harvarditem[Vilhuber and Abowd]{Vilhuber and Abowd}{2022}{vilhuber_end_2022}
+Vilhuber, Lars and John~M. Abowd (2022) ``End of life for the {Cornell}
+  {Synthetic} {Data} {Server} {September} 30, 2022,'' blog post, Cornell
+  University,
+  \url{https://web.archive.org/web/20221130032540/https://www2.vrdc.cornell.edu/news/}.
+
+\harvarditem[Vilhuber et~al.]{Vilhuber, Abowd and
+  Reiter}{2016}{VilhuberAbowdReiter-SJIAOS2016}
+Vilhuber, Lars, John~M. Abowd, and Jerome~P. Reiter (2016) ``Synthetic
+  establishment microdata around the world,'' \textit{Statistical Journal of
+  the IAOS}, 32 (1),  65--68,
+  \href{http://dx.doi.org/10.3233/SJI-160964}{\urlstyle{rm}
+  \nolinkurl{10.3233/SJI-160964}}, tex.owner: vilhuber tex.publisher: IOS Press
+  tex.timestamp: 2016.09.30.
+
+\harvarditem[Weinberg et~al.]{Weinberg, Abowd, Steel, Zayatz and
+  Rowland}{2007}{weinberg_access_2007}
+Weinberg, Daniel~H, John~M Abowd, Philip~M Steel, Laura Zayatz, and Sandra~K
+  Rowland (2007) ``Access {Methods} for {United} {States}
+  {Microdata},''Technical Report 07-25, Center for Economic Studies, U.S.
+  Census Bureau, \href{http://dx.doi.org/10.2139/ssrn.1015374}{\urlstyle{rm}
+  \nolinkurl{10.2139/ssrn.1015374}}.
+
+\end{thebibliography}
